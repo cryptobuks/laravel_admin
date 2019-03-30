@@ -12,20 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return redirect('/admin');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('admin', function () {
-    return view('admin_template');
-});
-
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	'auth'],function(){
 
     Route::get('test', 'TestController@index');
+
+    Route::get('/', function () {
+        return view('admin_template');
+    });
 
 });
