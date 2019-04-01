@@ -52,6 +52,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
+                <a class="nav-link" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fa fa-power-off"></i>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+            </li>
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="fa fa-comments-o"></i>
                     <span class="badge badge-danger navbar-badge">3</span>
