@@ -36,4 +36,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+    * 重写验证时使用的用户名字段
+    */
+    public function username()
+    {
+        return 'name';//默认为使用邮箱验证，这里可以改成用户名
+    }
+
 }
