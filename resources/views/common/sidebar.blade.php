@@ -23,8 +23,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-table"></i>
                         <p>
                             Starter Pages
@@ -33,19 +33,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('/') }}" class="nav-link">
+                            <a href="{{ route('/') }}" class="nav-link @if($request_path == "/admin") active @endif">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>Active Page</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('/') }}" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>Inactive Page</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.test') }}" class="nav-link">
+                            <a href="{{ route('admin.test') }}" class="nav-link @if($request_path == "/admin/test") active @endif">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p>Test</p>
                             </a>

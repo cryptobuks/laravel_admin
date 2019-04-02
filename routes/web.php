@@ -21,7 +21,7 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //超级管理员
-Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	'auth'],function(){
+Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
 
     Route::get('test', 'TestController@index')->name('admin.test');
 
