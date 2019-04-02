@@ -44,6 +44,12 @@
                                 <p>Inactive Page</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.test') }}" class="nav-link">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>Test</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 {{--<li class="nav-item">

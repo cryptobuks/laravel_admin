@@ -37,6 +37,10 @@ class TestController extends Controller
                 'color' => 'success'
             ]
         ];
+
+        $data['page_title'] = "测试页面";
+        $data['page_description'] = "Just do it!";
+
         return view('admin.test.test')->with($data);
     }
 

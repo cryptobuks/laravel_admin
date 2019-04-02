@@ -9,7 +9,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>AdminLTE 3 | Starter</title>
+    <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+    <title>管理后台</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/bower_components/admin-lte/plugins/font-awesome/css/font-awesome.min.css">
@@ -29,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="/bower_components/admin-lte/index3.html" class="nav-link">Home</a>
+                <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>

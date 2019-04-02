@@ -23,7 +23,7 @@ Auth::routes();
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	'auth'],function(){
 
-    Route::get('test', 'TestController@index');
+    Route::get('test', 'TestController@index')->name('admin.test');
 
     Route::get('/', function () {
         return view('admin_template');
