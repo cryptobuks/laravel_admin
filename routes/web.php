@@ -19,6 +19,9 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    return redirect('/admin');
+});
 
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
