@@ -16,9 +16,13 @@ class Menu
     public function handle($request, Closure $next)
     {
 
-        //菜单列表,当前请求uri
+        //获取菜单列表
+        $top_menus = \App\Model\Admin\Menu::getTopMenus();
+        $top_menus = $top_menus->toArray();
+
         $path = $request->path();
         view()->share('request_path', '/'.$path);
+
 
         return $next($request);
 
