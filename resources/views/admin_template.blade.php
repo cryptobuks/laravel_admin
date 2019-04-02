@@ -52,7 +52,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="nav-link" href="#" title="修改密码">
+                    <i class="nav-icon fa fa-key"></i>
+                </a>
+            </li>
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="退出登录">
                     <i class="nav-icon fa fa-power-off"></i>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
