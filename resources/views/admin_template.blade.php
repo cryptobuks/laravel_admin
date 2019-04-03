@@ -18,6 +18,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/bower_components/admin-lte/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .wrapper {
+            width: 100%;
+            min-height: 100%;
+            height: auto !important;
+            position: absolute;
+        }
+        .content-wrapper{
+            bottom: 50px;
+            position: fixed;
+            width: 100%;
+            top: 50px;
+        }
+        .main-footer{
+            bottom: 0px;
+            position: fixed;
+            width: 100%;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
