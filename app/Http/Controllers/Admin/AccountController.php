@@ -15,6 +15,6 @@ class AccountController extends Controller
             'page_title'        => '账户安全',
             'page_description'  => '修改登录密码',
         ];
-        return view('admin.account.main')->with($viewData);
+        return view('admin.account.resetPassword')->with($viewData);
     }
 }
