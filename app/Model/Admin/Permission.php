@@ -20,5 +20,10 @@ class Permission extends Model
      */
     public $timestamps = true;
 
+    public function menu()
+    {
+        return $this->belongsTo('\App\Model\Admin\Menu','id','permission_id');
+    }
+
 
 }

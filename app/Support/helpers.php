@@ -23,6 +23,22 @@ if (! function_exists('multisort')) {
     }
 }
 
+if (! function_exists('admin_group_tag')) {
+    /**
+     * SORT_REGULAR - 默认。将每一项按常规顺序排列。
+     * SORT_NUMERIC - 将每一项按数字顺序排列。
+     * SORT_STRING - 将每一项按字母顺序排列。
+     *
+     */
+    function admin_group_tag($key){
+        $groups = ['admin'=>'管理员管理','role'=>'权限管理','menu'=>'菜单管理','user'=>'用户管理','order'=>'订单管理','video'=>'视频管理','picture'=>'图片管理','vip'=>'VIP管理','channel'=>'渠道管理','version'=>'更新管理','news'=>'新闻管理','config'=>'配置管理','pay'=>'支付管理','bank'=>'银行卡管理','advert'=>'广告管理','perm'=>'权限管理','promotion'=>'推广管理','log'=>'日志管理'];
+        if(in_array($key,array_keys($groups))){
+            return $groups[$key];
+        }
+        return null;
+    }
+}
+
 if (! function_exists('Sec2Time')) {
     function Sec2Time($time){
         if(is_numeric($time)){

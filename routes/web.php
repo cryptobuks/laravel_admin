@@ -33,3 +33,11 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     })->name('/');
 
 });
+
+Route::get('/test1', function () {
+    echo "test1";
+});
+
+Route::get('/test2', function () {
+    echo "test2";
+});

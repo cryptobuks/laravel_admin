@@ -23,7 +23,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                {{--<li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-table"></i>
                         <p>
@@ -45,7 +45,30 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--}}
+
+                @foreach($menu_list as $menu)
+                    <li class="nav-item has-treeview @if($menu_group == $menu['group']) menu-open @endif">
+                        <a href="#" class="nav-link @if($menu_group == $menu['group']) active @endif">
+                            <i class="nav-icon fa fa-table"></i>
+                            <p>
+                                {{$menu['name']}}
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @foreach($menu['sub_menu'] as $sub_menu)
+                                <li class="nav-item">
+                                    <a href="{{ $sub_menu['link'] }}" class="nav-link @if($request_path == $sub_menu['link']) active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>{{ $sub_menu['name'] }}</p>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+
                 {{--<li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-th"></i>
