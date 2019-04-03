@@ -28,12 +28,11 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::get('/index', 'IndexController@index');
 
-    Route::group(['prefix'	=>	'/admin'], function(){
+    Route::group(['prefix'	=>	'/account'], function(){
         Route::get('/list', 'AccountController@getList');
         Route::get('/create', 'AccountController@getCreate');
         Route::post('/create', 'AccountController@postCreate');
-        Route::get('/password', 'AccountController@getPasswd');
-        Route::post('/password', 'AccountController@postPasswd');
+        Route::any('/password', 'AccountController@resetPassword');
         Route::post('/del', 'AccountController@postDel');
         Route::post('/detach', 'AccountController@postDetach');
     });
