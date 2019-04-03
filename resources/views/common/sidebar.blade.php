@@ -50,9 +50,9 @@
                 @foreach($menu_list as $menu)
                     <li class="nav-item has-treeview @if($menu_group == $menu['group']) menu-open @endif">
                         <a href="#" class="nav-link @if($menu_group == $menu['group']) active @endif">
-                            <i class="nav-icon fa fa-table"></i>
+                            <i class="nav-icon fa {{ $menu['icon'] }}"></i>
                             <p>
-                                {{$menu['name']}}
+                                {{ $menu['name'] }}
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
@@ -60,7 +60,7 @@
                             @foreach($menu['sub_menu'] as $sub_menu)
                                 <li class="nav-item">
                                     <a href="{{ $sub_menu['link'] }}" class="nav-link @if($request_path == $sub_menu['link']) active @endif">
-                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <i class="fa {{ $sub_menu['icon'] }} nav-icon"></i>
                                         <p>{{ $sub_menu['name'] }}</p>
                                     </a>
                                 </li>

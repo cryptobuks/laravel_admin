@@ -47,7 +47,7 @@ class Menu
             foreach ($perms as $perm) {
                 //子菜单的group属性为空
                 if($perm->menu && $perm->menu->pid>0 && $perm->menu->pid == $value['id']){
-                    $menus[$value['group']]['sub_menu'][] = ['name'=>$perm->menu['name'],'link'=>'/'.$perm->url,'sort'=>$perm->menu['sort']];
+                    $menus[$value['group']]['sub_menu'][] = ['name'=>$perm->menu['name'],'icon'=>$perm->menu['icon'],'link'=>'/'.$perm->url,'sort'=>$perm->menu['sort']];
                 }
             }
         }
