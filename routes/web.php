@@ -26,6 +26,18 @@ Route::get('/home', function () {
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
 
+    Route::get('/index', 'IndexController@index');
+
+    Route::group(['prefix'	=>	'/admin'], function(){
+        Route::get('/list', 'AccountController@getList');
+        Route::get('/create', 'AccountController@getCreate');
+        Route::post('/create', 'AccountController@postCreate');
+        Route::get('/password', 'AccountController@getPasswd');
+        Route::post('/password', 'AccountController@postPasswd');
+        Route::post('/del', 'AccountController@postDel');
+        Route::post('/detach', 'AccountController@postDetach');
+    });
+
     Route::get('test', 'TestController@index')->name('admin.test');
 
     Route::get('/', function () {
