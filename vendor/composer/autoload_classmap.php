@@ -24,6 +24,8 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Model\\Admin\\Menu' => $baseDir . '/app/Model/Admin/Menu.php',
     'App\\Model\\Admin\\Permission' => $baseDir . '/app/Model/Admin/Permission.php',
+    'App\\Model\\Admin\\Role' => $baseDir . '/app/Model/Admin/Role.php',
+    'App\\Model\\Admin\\RolePermission' => $baseDir . '/app/Model/Admin/RolePermission.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

@@ -19,6 +19,7 @@ class ComposerStaticInit00b785bf0914019330a5a290a8d8f828
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '6f63623309b417353d909e0e864f4beb' => __DIR__ . '/../..' . '/app/Support/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -353,6 +354,8 @@ class ComposerStaticInit00b785bf0914019330a5a290a8d8f828
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Model\\Admin\\Menu' => __DIR__ . '/../..' . '/app/Model/Admin/Menu.php',
         'App\\Model\\Admin\\Permission' => __DIR__ . '/../..' . '/app/Model/Admin/Permission.php',
+        'App\\Model\\Admin\\Role' => __DIR__ . '/../..' . '/app/Model/Admin/Role.php',
+        'App\\Model\\Admin\\RolePermission' => __DIR__ . '/../..' . '/app/Model/Admin/RolePermission.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
