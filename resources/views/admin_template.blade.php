@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" title="修改密码">
+                <a class="nav-link" href="{{ route('account.password') }}" title="修改密码">
                     <i class="nav-icon fa fa-key"></i>
                 </a>
             </li>
