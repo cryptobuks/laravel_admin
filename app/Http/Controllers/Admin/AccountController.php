@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Admin\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
-    public function getList(Request $request){
-
+    public function list(Request $request){
+        $lists = Account::all();
+        $viewData = [
+            'lists'     => $lists,
+            'page_title'=> '管理员列表',
+        ];
+        return view('admin.account.list')->with($viewData);
     }
 
     public function resetPassword(Request $request){

@@ -29,7 +29,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     Route::get('/index', 'IndexController@index');
 
     Route::group(['prefix'	=>	'/account'], function(){
-        Route::get('/list', 'AccountController@getList');
+        Route::get('/list', 'AccountController@list');
         Route::get('/create', 'AccountController@getCreate');
         Route::post('/create', 'AccountController@postCreate');
         Route::any('/password', 'AccountController@resetPassword')->name('account.password');
