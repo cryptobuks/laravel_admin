@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
+    public function getList(Request $request){
+
+    }
+
     public function resetPassword(Request $request){
         if( $request->isMethod('post') ){
             $user = $request->user();
@@ -44,7 +48,7 @@ class AccountController extends Controller
         }
         $viewData = [
             'page_title'        => '账户安全',
-            'page_description'  => '修改登录密码',
+            'page_description'  => '修改当前账户登录密码',
         ];
         return view('admin.account.resetPassword')->with($viewData);
     }
