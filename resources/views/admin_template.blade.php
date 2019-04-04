@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a class="nav-link" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="退出登录">
                     <i class="nav-icon fa fa-power-off"></i>
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"></form>
             </li>
             <!-- Messages Dropdown Menu -->
             {{--<li class="nav-item dropdown">
@@ -215,5 +215,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/bower_components/admin-lte/dist/js/adminlte.min.js"></script>
+@yield('script')
 </body>
 </html>
