@@ -25,7 +25,7 @@ class Account extends Model
      *
      * @var array
      */
-    protected $guarded = ['remember_token'];
+    protected $guarded = [];
 
     /**
      * Indicates if the model should be timestamped.
@@ -39,14 +39,14 @@ class Account extends Model
      *
      * @var array
      */
-    protected $visible = ['role_id', 'name', 'email', 'password'];
+    protected $visible = ['id', 'role_id', 'name', 'email', 'created_at'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
      */
-    protected $hidden = ['remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
 
 }

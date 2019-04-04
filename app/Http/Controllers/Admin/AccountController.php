@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class AccountController extends Controller
 {
     public function list(Request $request){
-        $lists = Account::all();
+        $lists = Account::all()->toArray();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '管理员列表',
