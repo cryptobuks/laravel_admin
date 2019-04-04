@@ -27,6 +27,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         .content-wrapper>.content{
             padding-bottom: 54px;
         }
+        small {
+            font-size: 15px;
+            font-weight: 200;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
