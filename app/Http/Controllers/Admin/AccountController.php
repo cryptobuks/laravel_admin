@@ -23,7 +23,6 @@ class AccountController extends Controller
 
     public function create(Request $request){
         if( $request->isMethod('post') ){
-            $user = $request->user();
             $data = $request->all();
             $rules = [
                 'name'                  => 'required|string|min:3|max:255|unique:admin_users',
@@ -54,6 +53,35 @@ class AccountController extends Controller
             return response()->json(['status' => 0, 'message' => "添加成功"]);
         }
         return view('admin.account.create');
+    }
+
+    public function reset(Request $request){
+        $data = $request->all();
+        if( $request->isMethod('post') ){
+            $rules = [
+                'id'                    => 'required|not_in:0',
+                'password'              => 'required|string|min:6|confirmed',
+                'password_confirmation' => 'required'
+            ];
+            $messages = [
+                'required'  => ":attribute不能为空",
+                'not_in'    => ":attribute错误",
+                'min'       => ":attribute最少:min个字符",
+                'confirmed' => "确认密码输入错误"
+            ];
+            $attributes = [
+                'id'                    => '用户ID',
+                'password'              => '密码',
+                'password_confirmation' => '确认密码'
+            ];
+            $validator = Validator::make($data, $rules, $messages, $attributes);
+            if( $validator->fails() ){
+                return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
+            }
+            User::where('id',$data['id'])->update(['password'=>bcrypt($data['password'])]);
+            return response()->json(['status' => 0, 'message' => "重置密码成功"]);
+        }
+        return view('admin.account.reset')->with($data);
     }
 
     public function changePassword(Request $request){
