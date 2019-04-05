@@ -56,7 +56,7 @@ class AccountController extends Controller
         return view('admin.account.create');
     }
 
-    public function resetPassword(Request $request){
+    public function changePassword(Request $request){
         if( $request->isMethod('post') ){
             $user = $request->user();
             $data = $request->all();
@@ -92,6 +92,6 @@ class AccountController extends Controller
             'page_title'        => '账户安全',
             'page_description'  => '修改当前账户登录密码',
         ];
-        return view('admin.account.resetPassword')->with($viewData);
+        return view('admin.account.changePassword')->with($viewData);
     }
 }

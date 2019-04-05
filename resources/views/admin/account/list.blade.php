@@ -34,9 +34,9 @@
                                         <td>{{ $list['role_id'] }}</td>
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i>编辑</button>
-                                            <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-key"></i>重置密码</button>
-                                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>删除</button>
+                                            <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit edit-account"></i>编辑</button>
+                                            <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-key reset-password"></i>重置密码</button>
+                                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash del-account"></i>删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
