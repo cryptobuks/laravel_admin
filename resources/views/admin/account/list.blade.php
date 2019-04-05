@@ -9,7 +9,9 @@
                         <div class="card-header" style="height: 50px">
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
-                                    <button type="button" class="btn btn-sm btn-success"><i class="fa fa-user-plus"></i>添加管理员</button>
+                                    <button type="button" class="btn btn-sm btn-success create-account" data-href="{{ route('account.create') }}" data-title="添加管理员">
+                                        <i class="fa fa-user-plus"></i>添加管理员
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -52,23 +54,49 @@
 @section('script')
     <script type="text/javascript">
         var $j = jQuery.noConflict();
-        $j(':submit').click(function(){
-            event.preventDefault();
+
+        $j('.create-account').click(function(){
+            var apiUrl = $j(this).data('href');
             $j.ajax({
-                url : "/admin/account/password",
-                type : "post",
-                data : $j('form').serialize(),
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
                 success: function(data){
-                    console.log(data);
-                    if(data.status === 0){
-                        alert(data.message);
-                        window.location.reload();
-                    }else{
-                        alert(data.message);
-                    }
+                    layer.open({
+                        title: $j(this).data('title'),
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: false,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
+                        }
+                    });
                 },
                 error: function(e){
-                    alert(e.statusText)
+                    layer.msg(e.statusText, {icon: 2})
                 }
             });
         });

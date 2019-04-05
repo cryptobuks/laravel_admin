@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin\Account;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,13 +12,48 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
-    public function list(Request $request){
+    public function list(){
         $lists = Account::all()->toArray();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '管理员列表',
         ];
         return view('admin.account.list')->with($viewData);
+    }
+
+    public function create(Request $request){
+        if( $request->isMethod('post') ){
+            $user = $request->user();
+            $data = $request->all();
+            $rules = [
+                'name'                  => 'required|string|min:3|max:255|unique:admin_users',
+                'email'                 => 'required|string|email|max:255',
+                'password'              => 'required|string|min:6|confirmed',
+                'password_confirmation' => 'required'
+            ];
+            $messages = [
+                'required'  => ":attribute不能为空",
+                'unique'    => ":attribute已存在",
+                'min'       => ":attribute最少:min个字符",
+                'max'       => ":attribute最多:max个字符",
+                'email'     => ":attribute格式错误",
+                'confirmed' => "确认密码输入错误"
+            ];
+            $attributes = [
+                'name'                  => '用户名',
+                'email'                 => '邮箱',
+                'password'              => '密码',
+                'password_confirmation' => '确认密码'
+            ];
+            $validator = Validator::make($data, $rules, $messages, $attributes);
+            if( $validator->fails() ){
+                return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
+            }
+            $data['password'] = bcrypt($data['password']);
+            User::create($data);
+            return response()->json(['status' => 0, 'message' => "添加成功"]);
+        }
+        return view('admin.account.create');
     }
 
     public function resetPassword(Request $request){

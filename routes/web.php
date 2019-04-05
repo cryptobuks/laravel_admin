@@ -30,8 +30,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::group(['prefix'	=>	'/account'], function(){
         Route::get('/list', 'AccountController@list');
-        Route::get('/create', 'AccountController@getCreate');
-        Route::post('/create', 'AccountController@postCreate');
+        Route::any('/create', 'AccountController@create')->name('account.create');
         Route::any('/password', 'AccountController@resetPassword')->name('account.password');
         Route::post('/del', 'AccountController@postDel');
         Route::post('/detach', 'AccountController@postDetach');

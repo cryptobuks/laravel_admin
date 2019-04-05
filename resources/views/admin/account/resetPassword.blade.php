@@ -44,7 +44,6 @@
                 type : "post",
                 data : $j(':password').serialize(),
                 success: function(data){
-                    console.log(data);
                     if(data.status === 0){
                         layer.msg(data.message, {
                             icon: 6,
