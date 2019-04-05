@@ -210,6 +210,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/bower_components/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- layer-v3.1.1 -->
+<script src="/bower_components/admin-lte/plugins/layer/layer.js"></script>
 @yield('script')
 </body>
 </html>

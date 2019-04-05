@@ -46,15 +46,22 @@
                 success: function(data){
                     console.log(data);
                     if(data.status === 0){
-                        alert(data.message);
-                        window.location.reload();
-                        // location.href = "/";
+                        layer.msg(data.message, {
+                            icon: 6,
+                            time: 0, //不自动关闭
+                            btn: ['确定'],
+                            btnAlign: 'c',
+                            yes: function(){
+                                // window.location.reload();
+                                location.href = "/";
+                            }
+                        });
                     }else{
-                        alert(data.message);
+                        layer.msg(data.message, {icon: 5});
                     }
                 },
                 error: function(e){
-                    alert(e.statusText)
+                    layer.msg(e.statusText, {icon: 2})
                 }
             });
         });
