@@ -34,7 +34,7 @@
                                         <td>{{ $list['role_id'] }}</td>
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-account"><i class="fa fa-edit"></i>编辑</button>
+                                            <button type="button" class="btn btn-sm btn-info edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i>编辑</button>
                                             <button type="button" class="btn btn-sm btn-warning reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置密码</button>
                                             <button type="button" class="btn btn-sm btn-danger del-account"><i class="fa fa-trash"></i>删除</button>
                                         </td>
@@ -148,6 +148,51 @@
             });
         });
 
+        $j('.edit-account').click(function(){
+            var apiUrl = $j(this).data('href');
+            $j.ajax({
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
+                success: function(data){
+                    layer.open({
+                        title: '编辑',
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: false,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
+                        }
+                    });
+                },
+                error: function(e){
+                    layer.msg(e.statusText, {icon: 2})
+                }
+            });
+        });
 
     </script>
 @stop

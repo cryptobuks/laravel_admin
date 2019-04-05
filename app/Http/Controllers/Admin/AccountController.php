@@ -55,6 +55,42 @@ class AccountController extends Controller
         return view('admin.account.create');
     }
 
+    public function edit(Request $request){
+        $data = $request->all();
+        if( $request->isMethod('post') ){
+            $rules = [
+                'id'    => 'required|not_in:0',
+                'name'  => 'required|string|min:3|max:255|unique:admin_users,name,'.$data['id'],
+                'email' => 'required|string|email|max:255',
+            ];
+            $messages = [
+                'required'  => ":attribute不能为空",
+                'not_in'    => ":attribute错误",
+                'unique'    => ":attribute已存在",
+                'min'       => ":attribute最少:min个字符",
+                'max'       => ":attribute最多:max个字符",
+                'email'     => ":attribute格式错误",
+            ];
+            $attributes = [
+                'id'    => '用户ID',
+                'name'  => '用户名',
+                'email' => '邮箱',
+            ];
+            $validator = Validator::make($data, $rules, $messages, $attributes);
+            if( $validator->fails() ){
+                return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
+            }
+            User::where('id',$data['id'])->update($data);
+            return response()->json(['status' => 0, 'message' => "修改成功"]);
+        }
+        if($data['id'] > 0){
+            $account = User::find($data['id']);
+            $data['name'] = $account->name;
+            $data['email'] = $account->email;
+        }
+        return view('admin.account.edit')->with($data);
+    }
+
     public function reset(Request $request){
         $data = $request->all();
         if( $request->isMethod('post') ){
