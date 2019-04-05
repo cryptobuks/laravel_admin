@@ -6,6 +6,13 @@
 
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header" style="height: 50px">
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm">
+                                    <button type="button" class="btn btn-sm btn-success"><i class="fa fa-user-plus"></i>添加管理员</button>
+                                </div>
+                            </div>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
@@ -15,6 +22,7 @@
                                     <th>邮箱</th>
                                     <th>角色</th>
                                     <th>创建日期</th>
+                                    <th>操作</th>
                                 </tr>
                                 @foreach($lists as $list)
                                     <tr>
@@ -23,6 +31,11 @@
                                         <td>{{ $list['email'] }}</td>
                                         <td>{{ $list['role_id'] }}</td>
                                         <td>{{ $list['created_at'] }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i>编辑</button>
+                                            <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-key"></i>重置密码</button>
+                                            <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>删除</button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>
