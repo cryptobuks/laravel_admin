@@ -30,12 +30,11 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::group(['prefix'	=>	'/account'], function(){
         Route::get('/list', 'AccountController@list');
+        Route::any('/password', 'AccountController@changePassword')->name('account.password');
         Route::any('/create', 'AccountController@create')->name('account.create');
         Route::any('/edit', 'AccountController@edit')->name('account.edit');
         Route::any('/reset', 'AccountController@reset')->name('account.reset');
-        Route::any('/password', 'AccountController@changePassword')->name('account.password');
-        Route::post('/del', 'AccountController@postDel');
-        Route::post('/detach', 'AccountController@postDetach');
+        Route::any('/del', 'AccountController@del')->name('account.delete');
     });
 
     Route::get('test', 'TestController@index')->name('admin.test');
