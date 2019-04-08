@@ -196,6 +196,7 @@
 
         $j('.del-account').click(function(){
             layer.confirm('是否确定删除？', {
+                skin: 'delete-class',
                 icon: 7,
                 title: false,
                 closeBtn: 0,
