@@ -26,7 +26,7 @@ Route::get('/home', function () {
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
 
-    Route::get('/index', 'IndexController@index');
+    Route::get('/index', 'IndexController@index')->name('index');
 
     Route::group(['prefix'	=>	'/account'], function(){
         Route::get('/list', 'AccountController@list');
@@ -37,7 +37,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'AccountController@del')->name('account.delete');
     });
 
-    Route::get('test', 'TestController@index')->name('admin.test');
+    Route::get('test', 'TestController@index')->name('test');
 
     Route::get('/', function () {
         return view('admin_template');

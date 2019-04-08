@@ -20,6 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
         body .delete-class .layui-layer-content {font-size: 25px}
+        small {font-size: 15px; font-weight: 200}
         .main-footer{
             bottom: 0;
             position: absolute;
@@ -27,10 +28,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
         .content-wrapper>.content{
             padding-bottom: 54px;
-        }
-        small {
-            font-size: 15px;
-            font-weight: 200;
         }
     </style>
 </head>

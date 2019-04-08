@@ -38,10 +38,10 @@ class TestController extends Controller
             ]
         ];
 
-        $data['page_title'] = "测试页面";
+        $data['page_title'] = "进度条";
         $data['page_description'] = "Just do it!";
 
-        return view('admin.test.test')->with($data);
+        return view('admin.test.main')->with($data);
     }
 
 }
