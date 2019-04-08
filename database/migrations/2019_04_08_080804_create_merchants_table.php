@@ -21,7 +21,7 @@ class CreateMerchantsTable extends Migration
             $table->string('security_password');
             $table->string('key');
             $table->string('salt');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
