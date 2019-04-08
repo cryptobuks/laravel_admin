@@ -13,18 +13,23 @@
 
 Route::get('/', function () {
 //    return view('welcome');
-    return redirect('/admin');
+    return redirect('/admin/index');
 });
 
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', function () {
-    return redirect('/admin');
+    return redirect('/admin/index');
 });
 
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
+
+    Route::get('/', function () {
+//        return view('admin.index.main');
+        return redirect('/admin/index');
+    });
 
     Route::get('/index', 'IndexController@index')->name('index');
 
@@ -39,9 +44,6 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::get('test', 'TestController@index')->name('test');
 
-    Route::get('/', function () {
-        return view('admin_template');
-    })->name('/');
 
 });
 
