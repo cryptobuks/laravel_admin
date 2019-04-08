@@ -38,9 +38,9 @@
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>{{ $list['updated_at'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i>重置秘钥</button>
-                                            <button type="button" class="btn btn-sm btn-warning reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置登录密码</button>
-                                            <button type="button" class="btn btn-sm btn-warning reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置资金密码</button>
+                                            <button type="button" class="btn btn-sm btn-warning edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i>重置秘钥</button>
+                                            <button type="button" class="btn btn-sm btn-info reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置登录密码</button>
+                                            <button type="button" class="btn btn-sm btn-primary reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置资金密码</button>
                                             <button type="button" class="btn btn-sm btn-danger del-account" data-href="{{ route('account.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i>删除</button>
                                         </td>
                                     </tr>
