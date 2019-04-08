@@ -42,6 +42,15 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'AccountController@del')->name('account.delete');
     });
 
+    Route::group(['prefix'	=>	'/merchant'], function(){
+        Route::get('/list', 'MerchantController@list');
+        Route::any('/password', 'MerchantController@changePassword')->name('merchant.password');
+        Route::any('/create', 'MerchantController@create')->name('merchant.create');
+        Route::any('/edit', 'MerchantController@edit')->name('merchant.edit');
+        Route::any('/reset', 'MerchantController@reset')->name('merchant.reset');
+        Route::any('/del', 'MerchantController@del')->name('merchant.delete');
+    });
+
     Route::get('test', 'TestController@index')->name('test');
 
 

@@ -13,7 +13,7 @@
                         <div class="inner">
                             <h3>150</h3>
 
-                            <p>今日订单总数</p>
+                            <p>订单总数</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -27,7 +27,7 @@
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>订单成功率</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -41,7 +41,7 @@
                         <div class="inner">
                             <h3>44</h3>
 
-                            <p>User Registrations</p>
+                            <p>新增商户</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -55,7 +55,7 @@
                         <div class="inner">
                             <h3>65</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>有效订单数量</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -67,9 +67,9 @@
                     <!-- small box -->
                     <div class="small-box bg-primary" style="background-color: #16ccb9!important;">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>26370</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>订单总金额</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
@@ -81,9 +81,9 @@
                     <!-- small box -->
                     <div class="small-box bg-secondary" style="background-color: #c313e6!important;">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>15820</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>总收入</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-social-yen"></i>
@@ -95,9 +95,9 @@
                     <!-- small box -->
                     <div class="small-box bg-secondary" style="background-color: #b2dc45!important;">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>3600</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>总提现</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-social-yen-outline"></i>
@@ -109,9 +109,9 @@
                     <!-- small box -->
                     <div class="small-box bg-secondary" style="background-color: #fb8c31!important;">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>11</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>好评数量</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-heart"></i>
@@ -123,9 +123,9 @@
                     <!-- small box -->
                     <div class="small-box bg-secondary" style="background-color: #f0f118!important;">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>111</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>收藏数量</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-android-attach"></i>
