@@ -88,8 +88,12 @@ class AccountController extends Controller
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
             $data['password'] = bcrypt($data['password']);
-            User::create($data);
-            return response()->json(['status' => 0, 'message' => "添加成功"]);
+            try{
+                User::create($data);
+                return response()->json(['status' => 0, 'message' => "添加成功"]);
+            } catch (\Exception $e){
+                return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+            }
         }
         return view('admin.account.create');
     }
@@ -119,8 +123,12 @@ class AccountController extends Controller
             if( $validator->fails() ){
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
-            User::where('id',$data['id'])->update($data);
-            return response()->json(['status' => 0, 'message' => "修改成功"]);
+            try{
+                User::where('id',$data['id'])->update($data);
+                return response()->json(['status' => 0, 'message' => "修改成功"]);
+            } catch (\Exception $e){
+                return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+            }
         }
         if($data['id'] > 0){
             $account = User::find($data['id']);
@@ -153,8 +161,12 @@ class AccountController extends Controller
             if( $validator->fails() ){
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
-            User::where('id',$data['id'])->update(['password'=>bcrypt($data['password'])]);
-            return response()->json(['status' => 0, 'message' => "重置密码成功"]);
+            try{
+                User::where('id',$data['id'])->update(['password'=>bcrypt($data['password'])]);
+                return response()->json(['status' => 0, 'message' => "重置密码成功"]);
+            } catch (\Exception $e){
+                return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+            }
         }
         return view('admin.account.reset')->with($data);
     }
@@ -162,9 +174,7 @@ class AccountController extends Controller
     public function del(Request $request){
         $data = $request->all();
         try{
-//            User::destroy($data['id']);
-            $user = User::find($data['id']);
-            $user->delete();
+            User::destroy($data['id']);
             return response()->json(['status' => 0, 'message' => '删除成功']);
         } catch (\Exception $e){
             return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
