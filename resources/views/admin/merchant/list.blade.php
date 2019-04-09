@@ -38,10 +38,10 @@
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>{{ $list['updated_at'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-warning edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i>重置秘钥</button>
-                                            <button type="button" class="btn btn-sm btn-info reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置登录密码</button>
-                                            <button type="button" class="btn btn-sm btn-primary reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置资金密码</button>
-                                            <button type="button" class="btn btn-sm btn-danger del-account" data-href="{{ route('account.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i>删除</button>
+                                            <button type="button" class="btn btn-sm btn-warning reset-key" data-href="{{ route('merchant.key',['id'=>$list['id']]) }}"><i class="fa fa-key"></i> 重置秘钥</button>
+                                            <button type="button" class="btn btn-sm btn-info reset-password" data-href="{{ route('merchant.password',['id'=>$list['id']]) }}"><i class="fa fa-user"></i> 重置登录密码</button>
+                                            <button type="button" class="btn btn-sm btn-primary reset-security" data-href="{{ route('merchant.security',['id'=>$list['id']]) }}"><i class="fa fa-rmb"></i> 重置资金密码</button>
+                                            <button type="button" class="btn btn-sm btn-danger del-merchant" data-href="{{ route('merchant.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -107,49 +107,33 @@
             });
         });
 
-        $j('.edit-account').click(function(){
+        $j('.reset-key').click(function(){
             var apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '编辑',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
+            layer.confirm('是否确定重置密钥？', {
+                skin: 'warning-class',
+                icon: 7,
+                title: false,
+                closeBtn: 0,
+                btn: ['确定','取消'],
+                btnAlign: 'c',
+                anim: 6,
+                shadeClose: true
+            }, function(){
+                $j.ajax({
+                    url : apiUrl,
+                    type : "post",
+                    success: function(data){
+                        if(data.status === 0){
+                            layer.msg(data.message, {icon: 6});
+                            window.location.reload();
+                        }else{
+                            layer.msg(data.message, {icon: 5});
                         }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
+                    },
+                    error: function(e){
+                        layer.msg(e.statusText, {icon: 2})
+                    }
+                });
             });
         });
 
@@ -161,7 +145,7 @@
                 dataType : "html",
                 success: function(data){
                     layer.open({
-                        title: '重置密码',
+                        title: '重置登录密码',
                         content: data,
                         type: 1,
                         offset: '100px',
@@ -199,10 +183,56 @@
             });
         });
 
-        $j('.del-account').click(function(){
+        $j('.reset-security').click(function(){
+            var apiUrl = $j(this).data('href');
+            $j.ajax({
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
+                success: function(data){
+                    layer.open({
+                        title: '重置资金密码',
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: false,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
+                        }
+                    });
+                },
+                error: function(e){
+                    layer.msg(e.statusText, {icon: 2})
+                }
+            });
+        });
+
+        $j('.del-merchant').click(function(){
             var apiUrl = $j(this).data('href');
             layer.confirm('是否确定删除？', {
-                skin: 'delete-class',
+                skin: 'warning-class',
                 icon: 7,
                 title: false,
                 closeBtn: 0,

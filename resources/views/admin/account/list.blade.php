@@ -34,9 +34,9 @@
                                         <td>{{ $list['role_id'] }}</td>
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i>编辑</button>
-                                            <button type="button" class="btn btn-sm btn-warning reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i>重置密码</button>
-                                            <button type="button" class="btn btn-sm btn-danger del-account" data-href="{{ route('account.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i>删除</button>
+                                            <button type="button" class="btn btn-sm btn-info edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                            <button type="button" class="btn btn-sm btn-warning reset-password" data-href="{{ route('account.reset',['id'=>$list['id']]) }}"><i class="fa fa-key"></i> 重置密码</button>
+                                            <button type="button" class="btn btn-sm btn-danger del-account" data-href="{{ route('account.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -197,7 +197,7 @@
         $j('.del-account').click(function(){
             var apiUrl = $j(this).data('href');
             layer.confirm('是否确定删除？', {
-                skin: 'delete-class',
+                skin: 'warning-class',
                 icon: 7,
                 title: false,
                 closeBtn: 0,
