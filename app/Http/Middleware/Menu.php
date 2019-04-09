@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Model\Admin\Permission;
 use Closure;
+use Illuminate\Support\Facades\Artisan;
 
 class Menu
 {
@@ -15,6 +17,38 @@ class Menu
      */
     public function handle($request, Closure $next)
     {
+        $routes = app('routes')->getRoutes();
+        $adminRoutes = [];
+        foreach ($routes as $route) {
+            $name = isset($route->action['as']) ? $route->action['as'] : "null";
+            $methods = $route->methods();
+            if(in_array('GET', $methods)){
+                $method = 'GET';
+            }elseif(in_array('POST', $methods)){
+                $method = 'POST';
+            }else{
+                continue;
+            }
+
+            $uri = $route->uri();
+            $uris = explode('/',$uri);
+
+            if(isset($uris[0]) && 'admin'==$uris[0] && count($uris)>1){
+                $adminRoutes[] = $name.'_'.$method.'_'.$uri;
+            }
+        }
+
+//        Artisan::call('config:cache');
+        $constants = config('constants');
+
+        foreach ($adminRoutes as $key => $value) {
+            $permArray = explode('_', $value);
+            $permission = Permission::findByMethodAndUrl($permArray[1], $permArray[2]);
+            $description = isset($constants[$permArray[2]]) ? $constants[$permArray[2]] : "null";
+            if(!$permission){
+                Permission::create(['description'=>$description, 'name'=>$permArray[0], 'method'=>$permArray[1], 'url'=>$permArray[2]]);
+            }
+        }
 
         //获取用户权限列表
         $user = $request->user();
@@ -34,8 +68,8 @@ class Menu
             }
         }
         if(!$auth){
-            //return response()->json(['stauts'=>'403,对不起，您无权访问该页面！','message'=>''],403);
-            abort(403,'对不起，您无权访问该页面！');
+            return response()->json(['stauts'=>'403,对不起，您无权访问该页面！','message'=>''],403);
+//            abort(403,'对不起，您无权访问该页面！');
         }
 
         //获取菜单列表

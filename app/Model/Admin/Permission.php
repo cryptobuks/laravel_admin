@@ -25,5 +25,9 @@ class Permission extends Model
         return $this->belongsTo('\App\Model\Admin\Menu','id','permission_id');
     }
 
+    public static function findByMethodAndUrl($method, $url){
+        return self::query()->where('method',$method)->where('url',$url)->first();
+    }
+
 
 }
