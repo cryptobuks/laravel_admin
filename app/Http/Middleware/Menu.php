@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Model\Admin\Permission;
 use Closure;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Redis;
 
 class Menu
 {
@@ -38,13 +39,18 @@ class Menu
                 $adminRoutes[] = $name.'_'.$method.'_'.$uri;
             }
         }
+//        echo env('REDIS_HOST', '127.0.0.1');die;
 
-
+//        $routeCache = Redis::hGetAll('routes');
+//        if($routeCache){
+//            $adminRoutes = array_diff($routeCache, $adminRoutes);
+//        }
 
 //        Artisan::call('config:cache');
         $constants = config('constants');
 
         foreach ($adminRoutes as $key => $value) {
+//            Redis::hSet('routes', $key, $value);
             $permArray = explode('_', $value);
             $permission = Permission::findByMethodAndUrl($permArray[1], $permArray[2]);
             $description = isset($constants[$permArray[2]]) ? $constants[$permArray[2]] : "null";

@@ -276,9 +276,9 @@
       'client' => 'predis',
       'default' => 
       array (
-        'host' => '127.0.0.1',
-        'password' => NULL,
-        'port' => '6379',
+        'host' => '192.168.1.166',
+        'password' => '778092c2cd71661098ff920af0feb89a',
+        'port' => '6378',
         'database' => 0,
       ),
     ),
