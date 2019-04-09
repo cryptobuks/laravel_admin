@@ -17,6 +17,7 @@ class Menu
      */
     public function handle($request, Closure $next)
     {
+        //1.根据routes配置的路由重构权限
         $routes = app('routes')->getRoutes();
         $adminRoutes = [];
         foreach ($routes as $route) {
@@ -37,6 +38,8 @@ class Menu
                 $adminRoutes[] = $name.'_'.$method.'_'.$uri;
             }
         }
+
+
 
 //        Artisan::call('config:cache');
         $constants = config('constants');
