@@ -10,13 +10,13 @@ use Illuminate\Support\Str;
 
 class MerchantController extends Controller
 {
-    public function list(){
+    public function index(){
         $lists = Merchant::all()->toArray();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '商户列表',
         ];
-        return view('admin.merchant.list')->with($viewData);
+        return view('admin.merchant.index')->with($viewData);
     }
 
     public function create(Request $request){

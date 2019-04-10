@@ -34,7 +34,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     Route::get('/index', 'IndexController@index')->name('index');
 
     Route::group(['prefix'	=>	'/account'], function(){
-        Route::get('/list', 'AccountController@list');
+        Route::get('/index', 'AccountController@index');
         Route::any('/password', 'AccountController@changePassword')->name('account.password');
         Route::any('/create', 'AccountController@create')->name('account.create');
         Route::any('/edit', 'AccountController@edit')->name('account.edit');
@@ -43,7 +43,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     });
 
     Route::group(['prefix'	=>	'/merchant'], function(){
-        Route::get('/list', 'MerchantController@list');
+        Route::get('/index', 'MerchantController@index');
         Route::any('/create', 'MerchantController@create')->name('merchant.create');
         Route::post('/key', 'MerchantController@resetKey')->name('merchant.key');
         Route::any('/password', 'MerchantController@resetPassword')->name('merchant.password');

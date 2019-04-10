@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
-    public function list(){
+    public function index(){
         $lists = Account::all()->toArray();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '管理员列表',
         ];
-        return view('admin.account.list')->with($viewData);
+        return view('admin.account.index')->with($viewData);
     }
 
     public function changePassword(Request $request){
