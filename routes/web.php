@@ -53,6 +53,10 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::group(['prefix' => '/permission'], function(){
         Route::get('/index', 'PermissionController@index')->name('permission.index');
+        Route::post('/clear', 'PermissionController@clear')->name('permission.clear');
+        Route::post('/restore', 'PermissionController@restore')->name('permission.restore');
+        Route::any('/edit', 'PermissionController@edit')->name('permission.edit');
+        Route::any('/del', 'PermissionController@del')->name('permission.delete');
     });
 
     Route::get('test', 'TestController@index')->name('test');

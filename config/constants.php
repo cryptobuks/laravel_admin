@@ -14,6 +14,10 @@ return [
     'admin/merchant/security'   => '重置商户资金密码',
     'admin/merchant/del'        => '删除商户',
     'admin/permission/index'    => '权限列表',
+    'admin/permission/clear'    => '清除权限缓存',
+    'admin/permission/restore'  => '重置权限表',
+    'admin/permission/edit'     => '编辑权限',
+    'admin/permission/del'      => '删除权限',
 
 
 
