@@ -59,6 +59,13 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'PermissionController@del')->name('permission.delete');
     });
 
+    Route::group(['prefix' => '/menu'], function(){
+        Route::get('/index', 'MenuController@index')->name('menu.index');
+        Route::any('/create', 'MenuController@create')->name('menu.create');
+        Route::any('/edit', 'MenuController@restore')->name('menu.edit');
+        Route::any('/del', 'MenuController@del')->name('menu.delete');
+    });
+
     Route::get('test', 'TestController@index')->name('test');
 
 

@@ -20,6 +20,13 @@ class Menu extends Model
      */
     public $timestamps = true;
 
+    /**
+     * The attributes that should be visible in serialization.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'pid', 'permission_id', 'group', 'name', 'icon', 'sort'];
+
     public static function getTopMenus(){
         return self::with('parent_menu')->with('sub_menus')->with('permission')->where('pid',0)->orderBy('sort','asc')->get();
     }

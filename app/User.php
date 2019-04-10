@@ -38,8 +38,8 @@ class User extends Authenticatable
 
     public function getPerms(){
         $user = $this->toArray();
-        if($user['id'] == 1){
-            //超级管理员全部权限
+        if( $this->isRoot() ){
+            //超级管理员拥有全部权限
             $permissions = Permission::with('menu')->get();
         } else {
             $permissions = RolePermission::with(['permission'=>function($query){
@@ -52,6 +52,21 @@ class User extends Authenticatable
             $permissions = $newPerms;
         }
         return $permissions;
+    }
+
+    public function getMenuPerms(){
+        if( $this->isRoot() ){
+            //超级管理员拥有全部权限
+            $permissions = Permission::query()->where('method','GET')->get();
+        }else{
+            $permissions = $this->role->perms;
+        }
+        return $permissions;
+    }
+
+    public function isRoot(){
+        $user = $this->toArray();
+        return in_array($user['id'], [1, 2]);
     }
 
 }

@@ -18,6 +18,10 @@ return [
     'admin/permission/restore'  => '重置权限表',
     'admin/permission/edit'     => '编辑权限',
     'admin/permission/del'      => '删除权限',
+    'admin/menu/index'          => '菜单列表',
+    'admin/menu/create'         => '添加菜单',
+    'admin/menu/edit'           => '修改菜单',
+    'admin/menu/del'            => '删除菜单',
 
 
 
