@@ -37,19 +37,21 @@ class User extends Authenticatable
     ];
 
     public function getPerms(){
-        if($this->id == 1){//超级管理员全部权限
-            $perms = Permission::with('menu')->get();
+        $user = $this->toArray();
+        if($user['id'] == 1){
+            //超级管理员全部权限
+            $permissions = Permission::with('menu')->get();
         } else {
-            $perms = RolePermission::with(['permission'=>function($query){
+            $permissions = RolePermission::with(['permission'=>function($query){
                 $query->with('menu');
-            }])->where('role_id', $this->role_id)->get();
+            }])->where('role_id', $user['role_id'])->get();
             $newPerms = [];
-            foreach ($perms as $key => $value) {
+            foreach ($permissions as $key => $value) {
                 $newPerms[] = $value->permission;
             }
-            $perms = $newPerms;
+            $permissions = $newPerms;
         }
-        return $perms;
+        return $permissions;
     }
 
 }

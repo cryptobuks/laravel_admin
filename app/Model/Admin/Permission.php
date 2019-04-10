@@ -11,7 +11,7 @@ class Permission extends Model
      *
      * @var array
      */
-    protected $fillable = ['description', 'method', 'name', 'url'];
+    protected $fillable = ['description', 'method', 'name', 'uri'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -25,8 +25,8 @@ class Permission extends Model
         return $this->belongsTo('\App\Model\Admin\Menu','id','permission_id');
     }
 
-    public static function findByMethodAndUrl($method, $url){
-        return self::query()->where('method',$method)->where('url',$url)->first();
+    public static function findByMethodAndUri($method, $uri){
+        return self::query()->where('method',$method)->where('uri',$uri)->first();
     }
 
 

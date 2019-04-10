@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Model\Admin\Permission;
 use Closure;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Redis;
 
 class Menu
@@ -17,59 +16,62 @@ class Menu
      */
     public function handle($request, Closure $next)
     {
-        //1.根据routes配置的路由重构权限
+        //1.根据routes配置的路由重构权限,从路由集中取出所有的route路由项
         $routes = app('routes')->getRoutes();
         $adminRoutes = [];
         foreach ($routes as $route) {
-            $name = isset($route->action['as']) ? $route->action['as'] : "null";
-            $methods = $route->methods();
-            if(in_array('GET', $methods)){
+            $methods = $route->methods;
+            if( in_array('GET', $methods) ){
                 $method = 'GET';
-            }elseif(in_array('POST', $methods)){
+            } elseif ( in_array('POST', $methods) ){
                 $method = 'POST';
-            }else{
+            } else {
                 continue;
             }
 
-            $uri = $route->uri();
-            $uris = explode('/',$uri);
+            $name = isset($route->action['as']) ? $route->action['as'] : "null";
 
-            if(isset($uris[0]) && 'admin'==$uris[0] && count($uris)>1){
-                $adminRoutes[] = $name.'_'.$method.'_'.$uri;
+            $uri = $route->uri;
+            $uriArray = explode('/',$uri);
+
+            if( isset($uriArray[0]) && $uriArray[0]=='admin' && count($uriArray)>1){
+                $adminRoutes[] = $method.'_'.$name.'_'.$uri;
             }
         }
-//        echo env('REDIS_HOST', '127.0.0.1');die;
 
-//        $routeCache = Redis::hGetAll('routes');
-//        if($routeCache){
-//            $adminRoutes = array_diff($routeCache, $adminRoutes);
-//        }
+        //从Redis中获取路由缓存并与路由集比对,取差集,Redis中没有的路由才能入库
+        $routeCache = Redis::hGetAll('routes');
+        if($routeCache){
+            $adminRoutes = array_diff($routeCache, $adminRoutes);
+        }
 
-//        Artisan::call('config:cache');
         $constants = config('constants');
 
+        //差集为新加入路由文件中的路由,新路由查询和入库
         foreach ($adminRoutes as $key => $value) {
-//            Redis::hSet('routes', $key, $value);
+            Redis::hSet('routes', $key, $value);
             $permArray = explode('_', $value);
-            $permission = Permission::findByMethodAndUrl($permArray[1], $permArray[2]);
-            $description = isset($constants[$permArray[2]]) ? $constants[$permArray[2]] : "null";
+            //判断权限表中是否已有该记录
+            $permission = Permission::findByMethodAndUri($permArray[0], $permArray[2]);
             if(!$permission){
-                Permission::create(['description'=>$description, 'name'=>$permArray[0], 'method'=>$permArray[1], 'url'=>$permArray[2]]);
+                $description = isset($constants[$permArray[2]]) ? $constants[$permArray[2]] : "null";
+                Permission::create(['description'=>$description, 'method'=>$permArray[0], 'name'=>$permArray[1], 'uri'=>$permArray[2]]);
             }
         }
 
-        //获取用户权限列表
+        //2.获取用户权限列表
         $user = $request->user();
         $perms = $user->getPerms();
 
-        //检查用户是否具有访问权限
+        //3.检查用户是否具有访问权限
         $callback = $request->getRouteResolver();
-        $router = $callback();//当前路由
+        $router = $callback();//当前请求的路由信息
+        //$router = Route::current();//同上
 
         $auth = false;
         $current_perm = '';
         foreach ($perms as $perm) {
-            if( in_array($perm->method, $router->methods()) && $perm->url == $router->uri()){
+            if( in_array($perm->method, $router->methods) && $perm->uri == $router->uri){
                 $auth = true;
                 $current_perm = $perm;
                 break;
@@ -80,7 +82,7 @@ class Menu
 //            abort(403,'对不起，您无权访问该页面！');
         }
 
-        //获取菜单列表
+        //4.根据菜单表和用户权限构建个人菜单
         $top_menus = \App\Model\Admin\Menu::getTopMenus();
         $top_menus = $top_menus->toArray();
         $menus = array();
@@ -89,7 +91,7 @@ class Menu
             foreach ($perms as $perm) {
                 //子菜单的group属性为空
                 if($perm->menu && $perm->menu->pid>0 && $perm->menu->pid == $value['id']){
-                    $menus[$value['group']]['sub_menu'][] = ['name'=>$perm->menu['name'],'icon'=>$perm->menu['icon'],'link'=>'/'.$perm->url,'sort'=>$perm->menu['sort']];
+                    $menus[$value['group']]['sub_menu'][] = ['name'=>$perm->menu['name'],'icon'=>$perm->menu['icon'],'link'=>'/'.$perm->uri,'sort'=>$perm->menu['sort']];
                 }
             }
         }
@@ -102,7 +104,7 @@ class Menu
             }
         }
 
-        //菜单列表，当前请求URL
+        //菜单列表，当前请求URI
         view()->share('menu_list', $menus);
         $path = $request->path();
         view()->share('request_path', '/'.$path);
