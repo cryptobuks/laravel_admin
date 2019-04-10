@@ -8,12 +8,12 @@
 
         <div class="form-group @if(isset($pid) && $pid>0) hide @endif">
             <label for="group">分组</label>
-            <input type="text" class="form-control" name="group" placeholder="请输入分组标志" value="{{$group or null}}">
+            <input type="text" class="form-control" id="group" name="group" placeholder="请输入分组标志" value="{{$group or null}}">
         </div>
 
         <div class="form-group @if(!isset($id)) hide @endif">
             <label for="uri">URI</label>
-            <input type="text" class="form-control" name="uri" placeholder="请输入路由" value="{{$uri or null}}">
+            <input type="text" class="form-control" id="uri_route" name="uri" placeholder="请输入路由" value="{{$uri or null}}">
         </div>
 
         <div class="form-group">
