@@ -104,27 +104,26 @@ class Menu
             }
         }
 
-        //菜单列表，当前请求URI
+        //菜单列表,当前请求URI
         view()->share('menu_list', $menus);
         $path = $request->path();
         view()->share('request_path', '/'.$path);
 
         //当前组名,当前菜单名
-        if($current_perm->menu){
+        if( $current_perm->menu ){
             $menu_group = $current_perm->menu->parent_menu->group;
             $menu_group_name = admin_group_tag($menu_group);
             $menu_name = $current_perm->menu->name;
-
-        }else{
+        } else {
             $menu_group = '';
             $menu_group_name = '';
             $menu_name = '';
         }
 
         $route = explode('/', $router->uri());
-        if(count($route)>2){
+        if( count($route) > 2 ){
             $current_route = $route[1];
-        }else{
+        } else {
             $current_route = array_pop($route);
         }
 
@@ -132,7 +131,6 @@ class Menu
         view()->share('menu_group', $menu_group);
         view()->share('menu_group_name', $menu_group_name);
         view()->share('menu_name', $menu_name);
-
 
         return $next($request);
 
