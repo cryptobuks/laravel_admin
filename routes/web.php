@@ -12,24 +12,24 @@
 */
 
 Route::get('/', function () {
-//    return view('welcome');
     return redirect('/admin/index');
 });
 
-Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', function () {
     return redirect('/admin/index');
 });
 
+Route::get('/admin', function () {
+    return redirect('/admin/index');
+});
+
+//Auth::routes(); //屏蔽注册路由
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
-
-    Route::get('/', function () {
-//        return view('admin.index.main');
-        return redirect('/admin/index');
-    });
 
     Route::get('/index', 'IndexController@index')->name('index');
 
@@ -54,12 +54,4 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     Route::get('test', 'TestController@index')->name('test');
 
 
-});
-
-Route::get('/test1', function () {
-    echo "test1";
-});
-
-Route::get('/test2', function () {
-    echo "test2";
 });
