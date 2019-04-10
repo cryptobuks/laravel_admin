@@ -2,7 +2,7 @@
 return [
     'admin/index'               => '首页',
     'admin/account/index'       => '管理员列表',
-    'admin/account/password'    => '修改密码',
+    'admin/account/password'    => '修改密码页面',
     'admin/account/create'      => '添加管理员',
     'admin/account/edit'        => '编辑管理员',
     'admin/account/reset'       => '重置管理员密码',

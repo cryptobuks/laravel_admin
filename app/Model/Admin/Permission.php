@@ -35,5 +35,8 @@ class Permission extends Model
         return self::query()->where('method',$method)->where('uri',$uri)->first();
     }
 
+    public static function getPagePermission(){
+        return self::query()->where('uri','like','%index')->orWhere('description','like','%页面')->get();
+    }
 
 }

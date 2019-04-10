@@ -57,9 +57,10 @@ class User extends Authenticatable
     public function getMenuPerms(){
         if( $this->isRoot() ){
             //超级管理员拥有全部权限
-            $permissions = Permission::query()->where('method','GET')->get();
+//            $permissions = Permission::query()->where('method','GET')->get();
+            $permissions = Permission::getPagePermission();
         }else{
-            $permissions = $this->role->permission;
+            $permissions = $this->role->permission; //todo
         }
         return $permissions;
     }
