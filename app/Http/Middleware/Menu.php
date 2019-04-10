@@ -77,8 +77,8 @@ class Menu
             }
         }
         if(!$auth){
-            return response()->json(['stauts'=>'403,对不起，您无权访问该页面！','message'=>''],403);
-//            abort(403,'对不起，您无权访问该页面！');
+//            return response()->json(['status'=>'403','message'=>'权限不足！']);
+            abort(403,'对不起，您无权访问该页面！');
         }
 
         //获取菜单列表
