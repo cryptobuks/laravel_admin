@@ -13,5 +13,9 @@ return [
     'admin/merchant/password'   => '重置商户登录密码',
     'admin/merchant/security'   => '重置商户资金密码',
     'admin/merchant/del'        => '删除商户',
+    'admin/permission/index'    => '权限列表',
+
+
+
     'admin/test'                => '调试页面',
 ];

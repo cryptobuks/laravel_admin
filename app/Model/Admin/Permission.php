@@ -20,8 +20,14 @@ class Permission extends Model
      */
     public $timestamps = true;
 
-    public function menu()
-    {
+    /**
+     * The attributes that should be visible in serialization.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'description', 'method', 'name', 'uri', 'created_at'];
+
+    public function menu(){
         return $this->belongsTo('\App\Model\Admin\Menu','id','permission_id');
     }
 

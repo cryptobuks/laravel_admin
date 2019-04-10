@@ -33,7 +33,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
 
     Route::get('/index', 'IndexController@index')->name('index');
 
-    Route::group(['prefix'	=>	'/account'], function(){
+    Route::group(['prefix' => '/account'], function(){
         Route::get('/index', 'AccountController@index')->name('account.index');
         Route::any('/password', 'AccountController@changePassword')->name('account.password');
         Route::any('/create', 'AccountController@create')->name('account.create');
@@ -42,13 +42,17 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'AccountController@del')->name('account.delete');
     });
 
-    Route::group(['prefix'	=>	'/merchant'], function(){
+    Route::group(['prefix' => '/merchant'], function(){
         Route::get('/index', 'MerchantController@index')->name('merchant.index');
         Route::any('/create', 'MerchantController@create')->name('merchant.create');
         Route::post('/key', 'MerchantController@resetKey')->name('merchant.key');
         Route::any('/password', 'MerchantController@resetPassword')->name('merchant.password');
         Route::any('/security', 'MerchantController@resetSecurity')->name('merchant.security');
         Route::any('/del', 'MerchantController@del')->name('merchant.delete');
+    });
+
+    Route::group(['prefix' => '/permission'], function(){
+        Route::get('/index', 'PermissionController@index')->name('permission.index');
     });
 
     Route::get('test', 'TestController@index')->name('test');

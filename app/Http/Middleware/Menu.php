@@ -42,7 +42,7 @@ class Menu
         //从Redis中获取路由缓存并与路由集比对,取差集,Redis中没有的路由才能入库
         $routeCache = Redis::hGetAll('routes');
         if($routeCache){
-            $adminRoutes = array_diff($routeCache, $adminRoutes);
+            $adminRoutes = array_diff($adminRoutes, $routeCache);//注意参数顺序
         }
 
         $constants = config('constants');
