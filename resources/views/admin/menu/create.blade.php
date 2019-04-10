@@ -11,11 +11,6 @@
             <input type="text" class="form-control" id="group" name="group" placeholder="请输入分组标志" value="{{$group or null}}">
         </div>
 
-        <div class="form-group @if(!isset($id)) hide @endif">
-            <label for="uri">URI</label>
-            <input type="text" class="form-control" id="uri_route" name="uri" placeholder="请输入路由" value="{{$uri or null}}">
-        </div>
-
         <div class="form-group">
             <label for="sort">排序</label>
             <input type="text" class="form-control" name="sort" placeholder="请输入序号-ASC" value="{{$sort or null}}">
@@ -26,13 +21,13 @@
             <select class="form-control" id="pid">
                 <option value="0" @if(empty($pid)) selected="selected" @endif>顶级菜单</option>
                 @foreach($top_menus as $menu)
-                    <option value="{{$menu->id}}" @if(isset($data->pid) && $data->pid == $menu->id) selected="selected" @endif>{{$menu->name}}</option>
+                    <option value="{{$menu->id}}" @if(isset($pid) && $pid == $menu->id) selected="selected" @endif>{{$menu->name}}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="form-group @if( !isset($data->pid) || (isset($data->pid) && ($data->pid==0)) ) hide @endif">
-            <label for="inputPassword3" class="col-sm-2 control-label">uri</label>
+        <div class="form-group @if( !isset($pid) || (isset($pid) && ($pid==0)) ) hide @endif">
+            <label for="inputPassword3" class="col-sm-2 control-label">URI</label>
             <select class="form-control" id="perm_id">
                 @foreach($permissions as $permission)
                     <option value="{{$permission->id}}" data-route="{{$permission->uri}}" @if(isset($permission_id) && $permission_id == $permission->id) selected="selected" @endif>{{$permission->description}}</option>

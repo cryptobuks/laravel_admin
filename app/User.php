@@ -59,7 +59,7 @@ class User extends Authenticatable
             //超级管理员拥有全部权限
             $permissions = Permission::query()->where('method','GET')->get();
         }else{
-            $permissions = $this->role->perms;
+            $permissions = $this->role->permission;
         }
         return $permissions;
     }

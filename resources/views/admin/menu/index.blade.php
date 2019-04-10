@@ -64,19 +64,6 @@
     <script type="text/javascript">
         let $j = jQuery.noConflict();
 
-        $j("#pid").change(function(){
-            let val = $j(this).val();
-            if( val === 0 ){
-                $j('#group').parent().parent().removeClass('hide');
-                $j('#perm_id').parent().parent().addClass('hide');
-                $j('#uri_route').parent().addClass('hide');
-            }else{
-                $j('#group').parent().parent().addClass('hide');
-                $j('#perm_id').parent().parent().removeClass('hide');
-                $j('#uri_route').parent().removeClass('hide');
-            }
-        });
-
         $j('.create-menu').click(function(){
             let apiUrl = $j(this).data('href');
             $j.ajax({
@@ -116,12 +103,24 @@
                             layer.close();
                         }
                     });
+                    $j("#pid").change(function(){
+                        let val = $j(this).val();
+                        if( val === '0' ){
+                            $j('#group').parent().removeClass('hide'); //父菜单显示分组
+                            $j('#perm_id').parent().addClass('hide'); //父菜单隐藏路由(权限)
+                        } else {
+                            $j('#group').parent().addClass('hide'); //子菜单隐藏分组
+                            $j('#perm_id').parent().removeClass('hide');//子菜单显示路由(权限)
+                        }
+                    });
                 },
                 error: function(e){
                     layer.msg(e.statusText, {icon: 2})
                 }
             });
         });
+
+
 
         $j('.clear-cache').click(function(){
             let apiUrl = $j(this).data('href');
