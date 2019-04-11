@@ -17,9 +17,9 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->integer('pid')->default(0);
             $table->integer('permission_id')->default(0);
-            $table->string('group')->nullable();
             $table->string('name');
             $table->string('icon');
+            $table->string('group')->nullable();
             $table->smallInteger('sort')->default(100);
             $table->timestamps();
         });

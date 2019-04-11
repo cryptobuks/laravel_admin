@@ -19,7 +19,7 @@
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <tr>
-                                    <th>名称</th>
+                                    <th>菜单名称</th>
                                     <th>分组</th>
                                     <th>URI</th>
                                     <th>排序</th>
@@ -104,13 +104,13 @@
                         }
                     });
                     $j("#pid").change(function(){
-                        let val = $j(this).val();
-                        if( val === '0' ){
-                            $j('#group').parent().removeClass('hide'); //父菜单显示分组
-                            $j('#perm_id').parent().addClass('hide'); //父菜单隐藏路由(权限)
+                        let pid = $j(this).val();
+                        if( pid === '0' ){
+                            $j('#group').parent().removeClass('hide'); //顶级菜单显示分组
+                            $j('#permission_id').parent().addClass('hide'); //顶级菜单隐藏路由(权限)
                         } else {
                             $j('#group').parent().addClass('hide'); //子菜单隐藏分组
-                            $j('#perm_id').parent().removeClass('hide');//子菜单显示路由(权限)
+                            $j('#permission_id').parent().removeClass('hide');//子菜单显示路由(权限)
                         }
                     });
                 },
