@@ -62,7 +62,7 @@ class MenuController extends Controller
         $user = $request->user();
         $data['permissions'] = $user->getMenuPerms();
         $data['top_menus'] = Menu::getTopMenus();
-        return view('admin.menu.create')->with($data);
+        return view('admin.menu.create_and_edit')->with($data);
     }
 
     public function edit(Request $request){
@@ -114,7 +114,7 @@ class MenuController extends Controller
         $user = $request->user();
         $data['permissions'] = $user->getMenuPerms();
         $data['top_menus'] = Menu::getTopMenus();
-        return view('admin.menu.create')->with($data);
+        return view('admin.menu.create_and_edit')->with($data);
     }
 
     public function del(Request $request){
