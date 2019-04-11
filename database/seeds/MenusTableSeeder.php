@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class MenusTableSeeder extends Seeder
 {
     /**
+     * php artisan db:seed --class=MenusTableSeeder
      * Run the database seeds.
      *
      * @return void
