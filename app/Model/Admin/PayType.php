@@ -25,6 +25,6 @@ class PayType extends Model
      *
      * @var array
      */
-    protected $visible = ['name', 'pay_type', 'rate', 'min', 'max', 'limit', 'settle_type', 'status'];
+    protected $visible = ['id', 'name', 'pay_type', 'rate', 'min', 'max', 'limit', 'settle_type', 'status'];
 
 }

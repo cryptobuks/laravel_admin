@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Admin\PayType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PayTypeController extends Controller
 {
@@ -21,76 +22,103 @@ class PayTypeController extends Controller
         if( $request->isMethod('post') ){
             $data = $request->all();
             $rules = [
-                'name' => 'required|string|min:2|max:100|unique:roles'
+                'name'        => 'required|string|min:2|max:100|unique:pay_types',
+                'pay_type'    => 'required|string|min:2|max:100|unique:pay_types',
+                'rate'        => 'required',
+                'min'         => 'required',
+                'max'         => 'required',
+                'limit'       => 'required',
+                'settle_type' => 'required|string',
+                'status'      => 'required|in:0,1',
             ];
             $messages = [
                 'required'  => ":attribute不能为空",
                 'string'    => ":attribute需为字符串",
                 'min'       => ":attribute最少:min个字符",
                 'max'       => ":attribute最多:max个字符",
-                'unique'    => ":attribute已存在"
+                'unique'    => ":attribute已存在",
+                'in'        => ":attribute错误"
             ];
             $attributes = [
-                'name' => '角色名称'
+                'name'        => '通道名称',
+                'pay_type'    => '支付类型',
+                'rate'        => '交易费率',
+                'min'         => '最小额度',
+                'max'         => '最大额度',
+                'limit'       => '当日限制额度',
+                'settle_type' => '结算方式',
+                'status'      => '通道状态',
             ];
             $validator = Validator::make($data, $rules, $messages, $attributes);
             if( $validator->fails() ){
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
             try{
-                Role::create($data);
+                PayType::create($data);
                 return response()->json(['status' => 0, 'message' => "添加成功"]);
             } catch (\Exception $e){
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
             }
         }
-        return view('admin.role.create');
+        return view('admin.payType.create');
     }
 
     public function edit(Request $request){
         $data = $request->all();
         if( $request->isMethod('post') ){
             $rules = [
-                'id'    => 'required|not_in:0',
-                'name'  => 'required|string|min:2|max:100|unique:roles,name,'.$data['id'],
+                'name'        => 'required|string|min:2|max:100|unique:pay_types,name,'.$data['id'],
+                'pay_type'    => 'required|string|min:2|max:100|unique:pay_types,pay_type,'.$data['id'],
+                'rate'        => 'required',
+                'min'         => 'required',
+                'max'         => 'required',
+                'limit'       => 'required',
+                'settle_type' => 'required|string',
+                'status'      => 'required|in:0,1',
             ];
             $messages = [
                 'required'  => ":attribute不能为空",
-                'not_in'    => ":attribute错误",
                 'string'    => ":attribute需为字符串",
                 'min'       => ":attribute最少:min个字符",
                 'max'       => ":attribute最多:max个字符",
-                'unique'    => ":attribute已存在"
+                'unique'    => ":attribute已存在",
+                'in'        => ":attribute错误"
             ];
             $attributes = [
-                'id'    => '角色ID',
-                'name'  => '角色名称'
+                'name'        => '通道名称',
+                'pay_type'    => '支付类型',
+                'rate'        => '交易费率',
+                'min'         => '最小额度',
+                'max'         => '最大额度',
+                'limit'       => '当日限制额度',
+                'settle_type' => '结算方式',
+                'status'      => '通道状态',
             ];
             $validator = Validator::make($data, $rules, $messages, $attributes);
             if( $validator->fails() ){
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
             try{
-                Role::where('id',$data['id'])->update($data);
+                PayType::where('id',$data['id'])->update($data);
                 return response()->json(['status' => 0, 'message' => "修改成功"]);
             } catch (\Exception $e){
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
             }
         }
         if($data['id'] > 0){
-            $data = Role::find($data['id'])->toArray();
+            $data = PayType::find($data['id'])->toArray();
         }
-        return view('admin.role.edit')->with($data);
+        return view('admin.payType.edit')->with($data);
     }
 
     public function set(){
-        //设置权限页面
+        //修改通道状态
     }
 
     public function del(Request $request){
         $data = $request->all();
         try{
-            Role::destroy($data['id']);
+            PayType::destroy($data['id']);
             return response()->json(['status' => 0, 'message' => '删除成功']);
         } catch (\Exception $e){
             return response()->json(['status' => 20001, 'message' => $e->getMessage()]);

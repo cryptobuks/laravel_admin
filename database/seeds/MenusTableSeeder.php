@@ -30,6 +30,7 @@ class MenusTableSeeder extends Seeder
         Menu::create(['pid'=>$system_pid, 'permission_id'=>$permissionIndex, 'name'=>'权限列表', 'icon'=>'fa-lock', 'group'=>'system', 'sort'=>30]);
         Menu::create(['pid'=>$system_pid, 'permission_id'=>$menuIndex, 'name'=>'菜单列表', 'icon'=>'fa-list-ul', 'group'=>'system', 'sort'=>40]);
 
+        //以下非必需
         //商户管理菜单下:商户列表
         Menu::create(['pid'=>0, 'permission_id'=>0, 'name'=>'商户管理', 'icon'=>'fa-address-book-o', 'group'=>'merchant', 'sort'=>20]);
 

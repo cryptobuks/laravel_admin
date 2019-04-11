@@ -10,7 +10,7 @@
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
                                     <button type="button" class="btn btn-sm btn-success create-payType" data-href="{{ route('payType.create') }}">
-                                        <i class="fa fa-street-view"></i> 添加通道
+                                        <i class="fa fa-gg"></i> 添加通道
                                     </button>
                                 </div>
                             </div>
@@ -66,10 +66,10 @@
                 dataType : "html",
                 success: function(data){
                     layer.open({
-                        title: '添加角色',
+                        title: '添加通道',
                         content: data,
                         type: 1,
-                        offset: '100px',
+                        offset: '0px',
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,
@@ -115,7 +115,7 @@
                         title: '编辑',
                         content: data,
                         type: 1,
-                        offset: '100px',
+                        offset: '0px',
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,
