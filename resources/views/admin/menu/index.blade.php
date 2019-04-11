@@ -32,8 +32,8 @@
                                         <td></td>
                                         <td>{{ $list['sort'] }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-permission" data-href="{{ route('permission.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
-                                            <button type="button" class="btn btn-sm btn-danger del-permission" data-href="{{ route('permission.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
+                                            <button type="button" class="btn btn-sm btn-info edit-menu" data-href="{{ route('menu.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                            <button type="button" class="btn btn-sm btn-danger del-menu" data-href="{{ route('menu.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
                                     @foreach($list->sub_menus as $sub_menu)
@@ -43,8 +43,8 @@
                                             <td>{{ $sub_menu['permission']['uri'] }}</td>
                                             <td>{{ $sub_menu['sort'] }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-info edit-permission" data-href="{{ route('permission.edit',['id'=>$sub_menu['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
-                                                <button type="button" class="btn btn-sm btn-danger del-permission" data-href="{{ route('permission.delete',['id'=>$sub_menu['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
+                                                <button type="button" class="btn btn-sm btn-info edit-menu" data-href="{{ route('menu.edit',['id'=>$sub_menu['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                                <button type="button" class="btn btn-sm btn-danger del-menu" data-href="{{ route('menu.delete',['id'=>$sub_menu['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -123,64 +123,62 @@
             });
         });
 
-
-
-        $j('.clear-cache').click(function(){
+        $j('.edit-menu').click(function(){
             let apiUrl = $j(this).data('href');
-            layer.confirm('确定清除权限缓存？', {
-                skin: 'warning-class',
-                icon: 7,
-                title: false,
-                closeBtn: 0,
-                btn: ['确定','取消'],
-                btnAlign: 'c',
-                anim: 6,
-                shadeClose: true
-            }, function(){
-                $j.ajax({
-                    url : apiUrl,
-                    type : "post",
-                    success: function(data){
-                        if(data.status === 0){
-                            layer.msg(data.message, {icon: 6});
-                        }else{
-                            layer.msg(data.message, {icon: 5});
+            $j.ajax({
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
+                success: function(data){
+                    layer.open({
+                        title: '编辑菜单',
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: true,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
                         }
-                    },
-                    error: function(e){
-                        layer.msg(e.statusText, {icon: 2})
-                    }
-                });
-            });
-        });
-
-        $j('.restore-permission').click(function(){
-            let apiUrl = $j(this).data('href');
-            layer.confirm('确定重置权限表？', {
-                skin: 'warning-class',
-                icon: 7,
-                title: false,
-                closeBtn: 0,
-                btn: ['确定','取消'],
-                btnAlign: 'c',
-                anim: 6,
-                shadeClose: true
-            }, function(){
-                $j.ajax({
-                    url : apiUrl,
-                    type : "post",
-                    success: function(data){
-                        if(data.status === 0){
-                            layer.msg(data.message, {icon: 6});
-                            window.location.reload();
-                        }else{
-                            layer.msg(data.message, {icon: 5});
+                    });
+                    $j("#pid").change(function(){
+                        let pid = $j(this).val();
+                        if( pid === '0' ){
+                            $j('#group').parent().removeClass('hide'); //顶级菜单显示分组
+                            $j('#permission_id').parent().addClass('hide'); //顶级菜单隐藏路由(权限)
+                        } else {
+                            $j('#group').parent().addClass('hide'); //子菜单隐藏分组
+                            $j('#permission_id').parent().removeClass('hide');//子菜单显示路由(权限)
+                            $j('#permission_id').change(function () {
+                                $j("input[name='name']").val($j(this).find("option:selected").text());
+                            });
                         }
-                    },
-                    error: function(e){
-                        layer.msg(e.statusText, {icon: 2})
-                    }
-                });
+                    });
+                },
+                error: function(e){
+                    layer.msg(e.statusText, {icon: 2})
+                }
             });
         });
 
