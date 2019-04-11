@@ -1,0 +1,73 @@
+body .warning-class .layui-layer-content {
+    font-size: 25px
+}
+
+small {
+    font-size: 15px;
+    font-weight: 200
+}
+
+.btn-purple {
+    color: #ffffff;
+    background-color: #921992;
+    border-color: #921992;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.btn-purple:hover {
+    color: #ffffff;
+    background-color: #741874;
+    border-color: #741874;
+}
+
+.btn-orange {
+    color: #ffffff;
+    background-color: #fb8c31;
+    border-color: #fb8c31;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.btn-orange:hover {
+    color: #ffffff;
+    background-color: #d46c31;
+    border-color: #d46c31;
+}
+
+.btn-cyan {
+    color: #ffffff;
+    background-color: #16ccb9;
+    border-color: #16ccb9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.btn-cyan:hover {
+    color: #ffffff;
+    background-color: #169d8a;
+    border-color: #169d8a;
+}
+
+.btn-blue {
+    color: #ffffff;
+    background-color: #367fa9;
+    border-color: #367fa9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.btn-blue:hover {
+    color: #ffffff;
+    background-color: #286090;
+    border-color: #286090;
+}
+
+.btn-light-blue {
+    color: #ffffff;
+    background-color: #00c0ef;
+    border-color: #00acd6;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.btn-light-blue:hover {
+    color: #ffffff;
+    background-color: #008eb9;
+    border-color: #008eb9;
+}

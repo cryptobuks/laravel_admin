@@ -18,10 +18,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/bower_components/admin-lte/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     @yield('style')
     <style>
-        body .warning-class .layui-layer-content {font-size: 25px}
-        small {font-size: 15px; font-weight: 200}
         .main-footer{
             bottom: 0;
             position: absolute;

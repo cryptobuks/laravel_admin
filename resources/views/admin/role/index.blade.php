@@ -33,6 +33,7 @@
                                         <td>{{ $list['updated_at'] }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-role" data-href="{{ route('role.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                            <button type="button" class="btn btn-sm btn-purple set-role" data-href="{{ route('role.set',['id'=>$list['id']]) }}"><i class="fa fa-lock"></i> 设置权限</button>
                                             <button type="button" class="btn btn-sm btn-danger del-role" data-href="{{ route('role.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
@@ -107,6 +108,52 @@
                 success: function(data){
                     layer.open({
                         title: '编辑',
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: false,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
+                        }
+                    });
+                },
+                error: function(e){
+                    layer.msg(e.statusText, {icon: 2})
+                }
+            });
+        });
+
+        $j('.set-role').click(function(){
+            let apiUrl = $j(this).data('href');
+            $j.ajax({
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
+                success: function(data){
+                    layer.open({
+                        title: '设置权限',
                         content: data,
                         type: 1,
                         offset: '100px',
