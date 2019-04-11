@@ -79,7 +79,7 @@
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,
-                        fixed: false,
+                        fixed: true,
                         btn: ['确定','取消'],
                         yes: function () {
                             $j.ajax({
