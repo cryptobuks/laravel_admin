@@ -9,12 +9,11 @@ return [
     'admin/account/reset'       => '重置管理员密码',
     'admin/account/del'         => '删除管理员',
 
-    'admin/merchant/index'      => '商户列表',
-    'admin/merchant/create'     => '添加商户',
-    'admin/merchant/key'        => '重置商户密钥',
-    'admin/merchant/password'   => '重置商户登录密码',
-    'admin/merchant/security'   => '重置商户资金密码',
-    'admin/merchant/del'        => '删除商户',
+    'admin/role/index'          => '角色列表',
+    'admin/role/create'         => '添加角色',
+    'admin/role/edit'           => '编辑角色',
+    'admin/role/set'            => '设置权限',
+    'admin/role/del'            => '删除角色',
 
     'admin/permission/index'    => '权限列表',
     'admin/permission/clear'    => '清除权限缓存',
@@ -26,6 +25,13 @@ return [
     'admin/menu/create'         => '添加菜单',
     'admin/menu/edit'           => '修改菜单',
     'admin/menu/del'            => '删除菜单',
+
+    'admin/merchant/index'      => '商户列表',
+    'admin/merchant/create'     => '添加商户',
+    'admin/merchant/key'        => '重置商户密钥',
+    'admin/merchant/password'   => '重置商户登录密码',
+    'admin/merchant/security'   => '重置商户资金密码',
+    'admin/merchant/del'        => '删除商户',
 
     'admin/test'                => '调试页面',
 ];
