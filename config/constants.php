@@ -33,5 +33,4 @@ return [
     'admin/merchant/security'   => '重置商户资金密码',
     'admin/merchant/del'        => '删除商户',
 
-    'admin/test'                => '调试页面',
 ];
