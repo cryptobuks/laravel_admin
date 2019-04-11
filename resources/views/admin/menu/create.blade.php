@@ -30,7 +30,7 @@
             <label for="inputPassword3" class="col-sm-2 control-label">URI</label>
             <select class="form-control" id="perm_id">
                 @foreach($permissions as $permission)
-                    <option value="{{$permission->id}}" data-route="{{$permission->uri}}" @if(isset($permission_id) && $permission_id == $permission->id) selected="selected" @endif>{{$permission->description}}</option>
+                    <option value="{{$permission->id}}" @if(isset($permission_id) && $permission_id == $permission->id) selected="selected" @endif>{{$permission->description}}</option>
                 @endforeach
             </select>
         </div>
