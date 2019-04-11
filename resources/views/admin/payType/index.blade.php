@@ -1,4 +1,11 @@
 @extends('admin_template')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
+    <style>
+        .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+        .toggle.ios .toggle-handle { border-radius: 20px; }
+    </style>
+@stop
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -36,7 +43,10 @@
                                         <td>{{ $list['min'] }} - {{ $list['max'] }}</td>
                                         <td>{{ $list['limit'] }}</td>
                                         <td>{{ $list['settle_type'] }}</td>
-                                        <td>{{ $list['status'] }}</td>
+{{--                                        <td>{{ $list['status'] }}</td>--}}
+                                        <td>
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="10" data-onstyle="success" data-style="ios">
+                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
                                             <button type="button" class="btn btn-sm btn-danger del-payType" data-href="{{ route('payType.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
@@ -55,6 +65,7 @@
     </section>
 @stop
 @section('script')
+    <script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
     <script type="text/javascript">
         let $j = jQuery.noConflict();
 
