@@ -117,4 +117,14 @@ class MenuController extends Controller
         return view('admin.menu.create')->with($data);
     }
 
+    public function del(Request $request){
+        $data = $request->all();
+        try{
+            Menu::destroy($data['id']);
+            return response()->json(['status' => 0, 'message' => '删除成功']);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
+    }
+
 }

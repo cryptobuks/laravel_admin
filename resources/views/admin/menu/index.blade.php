@@ -182,7 +182,7 @@
             });
         });
 
-        $j('.del-permission').click(function(){
+        $j('.del-menu').click(function(){
             let apiUrl = $j(this).data('href');
             layer.confirm('是否确定删除？', {
                 skin: 'warning-class',
