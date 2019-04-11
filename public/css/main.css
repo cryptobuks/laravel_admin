@@ -7,6 +7,13 @@ small {
     font-weight: 200
 }
 
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+    border-radius: 20px;
+}
+.toggle.ios .toggle-handle {
+    border-radius: 20px;
+}
+
 .btn-purple {
     color: #ffffff;
     background-color: #921992;

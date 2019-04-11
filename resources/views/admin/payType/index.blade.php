@@ -1,10 +1,6 @@
 @extends('admin_template')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
-    <style>
-        .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-        .toggle.ios .toggle-handle { border-radius: 20px; }
-    </style>
 @stop
 @section('content')
     <section class="content">
@@ -45,7 +41,7 @@
                                         <td>{{ $list['settle_type'] }}</td>
 {{--                                        <td>{{ $list['status'] }}</td>--}}
                                         <td>
-                                            <input type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="10" data-onstyle="success" data-style="ios">
+                                            <input type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
