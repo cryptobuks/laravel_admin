@@ -41,7 +41,7 @@
                                         <td>{{ $list['settle_type'] }}</td>
 {{--                                        <td>{{ $list['status'] }}</td>--}}
                                         <td>
-                                            <input type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                            <input id="toggle-event" type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
@@ -64,6 +64,67 @@
     <script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
     <script type="text/javascript">
         let $j = jQuery.noConflict();
+
+        $j(function() {
+            $j('#toggle-event').change(function() {
+                let val = $j(this).prop('checked');
+                if(val){
+                    layer.confirm('是否确定开启此通道？', {
+                        skin: 'warning-class',
+                        icon: 7,
+                        title: false,
+                        closeBtn: 0,
+                        btn: ['确定','取消'],
+                        btnAlign: 'c',
+                        anim: 6,
+                        shadeClose: true
+                    }, function(){
+                        $j.ajax({
+                            url : {{ route('payType.edit',['id'=>$list['id']]) }},
+                            type : "delete",
+                            success: function(data){
+                                if(data.status === 0){
+                                    layer.msg(data.message, {icon: 6});
+                                    window.location.reload();
+                                }else{
+                                    layer.msg(data.message, {icon: 5});
+                                }
+                            },
+                            error: function(e){
+                                layer.msg(e.statusText, {icon: 2})
+                            }
+                        });
+                    });
+                } else {
+                    layer.confirm('是否确定关闭此通道？', {
+                        skin: 'warning-class',
+                        icon: 7,
+                        title: false,
+                        closeBtn: 0,
+                        btn: ['确定','取消'],
+                        btnAlign: 'c',
+                        anim: 6,
+                        shadeClose: true
+                    }, function(){
+                        $j.ajax({
+                            url : apiUrl,
+                            type : "delete",
+                            success: function(data){
+                                if(data.status === 0){
+                                    layer.msg(data.message, {icon: 6});
+                                    window.location.reload();
+                                }else{
+                                    layer.msg(data.message, {icon: 5});
+                                }
+                            },
+                            error: function(e){
+                                layer.msg(e.statusText, {icon: 2})
+                            }
+                        });
+                    });
+                }
+            })
+        });
 
         $j('.create-payType').click(function(){
             let apiUrl = $j(this).data('href');
@@ -123,52 +184,6 @@
                         content: data,
                         type: 1,
                         offset: '0px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
-                        }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
-            });
-        });
-
-        $j('.set-payType').click(function(){
-            let apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '设置权限',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,
