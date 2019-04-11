@@ -218,6 +218,10 @@
                             layer.close();
                         }
                     });
+                    $j('#pay-type-status').bootstrapToggle();
+                    $j('#pay-type-status').change(function() {
+                        $j("input[name='status']").val($j(this).prop('checked') ? 1 : 0);
+                    })
                 },
                 error: function(e){
                     layer.msg(e.statusText, {icon: 2})

@@ -31,7 +31,10 @@
         </div>
         <div class="form-group">
             <label for="status">通道状态</label>
-            <input type="text" class="form-control" name="status" placeholder="请输入通道状态" value="{{$status or null}}">
+            <div>
+                <input type="hidden" class="form-control" name="status" value="{{$status or null}}">
+                <input type="checkbox" id="pay-type-status" @if($status==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-onstyle="success" data-offstyle="danger">
+            </div>
         </div>
     </div>
     <!-- /.card-body -->
