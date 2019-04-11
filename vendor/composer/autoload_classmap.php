@@ -6,13 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminUsersTableSeeder' => $baseDir . '/database/seeds/AdminUsersTableSeeder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Admin\\AccountController' => $baseDir . '/app/Http/Controllers/Admin/AccountController.php',
     'App\\Http\\Controllers\\Admin\\IndexController' => $baseDir . '/app/Http/Controllers/Admin/IndexController.php',
     'App\\Http\\Controllers\\Admin\\MenuController' => $baseDir . '/app/Http/Controllers/Admin/MenuController.php',
     'App\\Http\\Controllers\\Admin\\MerchantController' => $baseDir . '/app/Http/Controllers/Admin/MerchantController.php',
+    'App\\Http\\Controllers\\Admin\\PayTypeController' => $baseDir . '/app/Http/Controllers/Admin/PayTypeController.php',
     'App\\Http\\Controllers\\Admin\\PermissionController' => $baseDir . '/app/Http/Controllers/Admin/PermissionController.php',
+    'App\\Http\\Controllers\\Admin\\RoleController' => $baseDir . '/app/Http/Controllers/Admin/RoleController.php',
     'App\\Http\\Controllers\\Admin\\TestController' => $baseDir . '/app/Http/Controllers/Admin/TestController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -30,6 +33,7 @@ return array(
     'App\\Model\\Admin\\Account' => $baseDir . '/app/Model/Admin/Account.php',
     'App\\Model\\Admin\\Menu' => $baseDir . '/app/Model/Admin/Menu.php',
     'App\\Model\\Admin\\Merchant' => $baseDir . '/app/Model/Admin/Merchant.php',
+    'App\\Model\\Admin\\PayType' => $baseDir . '/app/Model/Admin/PayType.php',
     'App\\Model\\Admin\\Permission' => $baseDir . '/app/Model/Admin/Permission.php',
     'App\\Model\\Admin\\Role' => $baseDir . '/app/Model/Admin/Role.php',
     'App\\Model\\Admin\\RolePermission' => $baseDir . '/app/Model/Admin/RolePermission.php',

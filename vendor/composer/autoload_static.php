@@ -341,13 +341,16 @@ class ComposerStaticInit00b785bf0914019330a5a290a8d8f828
     );
 
     public static $classMap = array (
+        'AdminUsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminUsersTableSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AccountController.php',
         'App\\Http\\Controllers\\Admin\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/IndexController.php',
         'App\\Http\\Controllers\\Admin\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MenuController.php',
         'App\\Http\\Controllers\\Admin\\MerchantController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MerchantController.php',
+        'App\\Http\\Controllers\\Admin\\PayTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PayTypeController.php',
         'App\\Http\\Controllers\\Admin\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermissionController.php',
+        'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',
         'App\\Http\\Controllers\\Admin\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TestController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -365,6 +368,7 @@ class ComposerStaticInit00b785bf0914019330a5a290a8d8f828
         'App\\Model\\Admin\\Account' => __DIR__ . '/../..' . '/app/Model/Admin/Account.php',
         'App\\Model\\Admin\\Menu' => __DIR__ . '/../..' . '/app/Model/Admin/Menu.php',
         'App\\Model\\Admin\\Merchant' => __DIR__ . '/../..' . '/app/Model/Admin/Merchant.php',
+        'App\\Model\\Admin\\PayType' => __DIR__ . '/../..' . '/app/Model/Admin/PayType.php',
         'App\\Model\\Admin\\Permission' => __DIR__ . '/../..' . '/app/Model/Admin/Permission.php',
         'App\\Model\\Admin\\Role' => __DIR__ . '/../..' . '/app/Model/Admin/Role.php',
         'App\\Model\\Admin\\RolePermission' => __DIR__ . '/../..' . '/app/Model/Admin/RolePermission.php',
