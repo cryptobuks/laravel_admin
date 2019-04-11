@@ -111,8 +111,14 @@ class PayTypeController extends Controller
         return view('admin.payType.edit')->with($data);
     }
 
-    public function set(){
-        //修改通道状态
+    public function lock($id, $status){
+        try{
+            PayType::where('id',$id)->update(['status'=>$status]);
+            $message = $status == 1 ? "通道开启成功" : "通道关闭成功";
+            return response()->json(['status' => 0, 'message' => $message]);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
     }
 
     public function del(Request $request){

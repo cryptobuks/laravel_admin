@@ -32,6 +32,7 @@
                                     <th>操作</th>
                                 </tr>
                                 @foreach($lists as $list)
+                                    @php $lockApi = $list['status'] == 1 ? route('payType.lock',[$list['id'],0]) : route('payType.lock',[$list['id'],1]); @endphp
                                     <tr>
                                         <td>{{ $list['name'] }}</td>
                                         <td>{{ $list['pay_type'] }}</td>
@@ -39,9 +40,8 @@
                                         <td>{{ $list['min'] }} - {{ $list['max'] }}</td>
                                         <td>{{ $list['limit'] }}</td>
                                         <td>{{ $list['settle_type'] }}</td>
-{{--                                        <td>{{ $list['status'] }}</td>--}}
                                         <td>
-                                            <input id="toggle-event" type="checkbox" checked data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                            <input id="toggle-event" type="checkbox" data-href="{{ $lockApi }}" @if($list['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
@@ -67,6 +67,7 @@
 
         $j(function() {
             $j('#toggle-event').change(function() {
+                let lockApi = $j(this).data('href');
                 let val = $j(this).prop('checked');
                 if(val){
                     layer.confirm('是否确定开启此通道？', {
@@ -77,23 +78,26 @@
                         btn: ['确定','取消'],
                         btnAlign: 'c',
                         anim: 6,
-                        shadeClose: true
+                        shadeClose: false
                     }, function(){
                         $j.ajax({
-                            url : {{ route('payType.edit',['id'=>$list['id']]) }},
-                            type : "delete",
+                            url : lockApi,
+                            type : "post",
                             success: function(data){
                                 if(data.status === 0){
                                     layer.msg(data.message, {icon: 6});
-                                    window.location.reload();
                                 }else{
                                     layer.msg(data.message, {icon: 5});
                                 }
+                                window.location.reload();
                             },
                             error: function(e){
-                                layer.msg(e.statusText, {icon: 2})
+                                layer.msg(e.statusText, {icon: 2});
+                                window.location.reload();
                             }
                         });
+                    }, function () {
+                        window.location.reload();
                     });
                 } else {
                     layer.confirm('是否确定关闭此通道？', {
@@ -104,23 +108,26 @@
                         btn: ['确定','取消'],
                         btnAlign: 'c',
                         anim: 6,
-                        shadeClose: true
+                        shadeClose: false
                     }, function(){
                         $j.ajax({
-                            url : apiUrl,
-                            type : "delete",
+                            url : lockApi,
+                            type : "post",
                             success: function(data){
                                 if(data.status === 0){
                                     layer.msg(data.message, {icon: 6});
-                                    window.location.reload();
                                 }else{
                                     layer.msg(data.message, {icon: 5});
                                 }
+                                window.location.reload();
                             },
                             error: function(e){
-                                layer.msg(e.statusText, {icon: 2})
+                                layer.msg(e.statusText, {icon: 2});
+                                window.location.reload();
                             }
                         });
+                    }, function () {
+                        window.location.reload();
                     });
                 }
             })

@@ -85,7 +85,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::get('/index', 'PayTypeController@index')->name('payType.index');
         Route::any('/create', 'PayTypeController@create')->name('payType.create');
         Route::any('/edit', 'PayTypeController@edit')->name('payType.edit');
-        Route::any('/lock/{id}', 'PayTypeController@lock')->name('payType.lock');
+        Route::any('/lock/{id}/{status}', 'PayTypeController@lock')->name('payType.lock');
         Route::any('/del', 'PayTypeController@del')->name('payType.delete');
     });
 
