@@ -111,6 +111,9 @@
                         } else {
                             $j('#group').parent().addClass('hide'); //子菜单隐藏分组
                             $j('#permission_id').parent().removeClass('hide');//子菜单显示路由(权限)
+                            $j('#permission_id').change(function () {
+                                $j("input[name='name']").val($j(this).find("option:selected").text());
+                            });
                         }
                     });
                 },
