@@ -31,8 +31,10 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 //超级管理员
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['auth', 'menu']],function(){
 
+    //首页
     Route::get('/index', 'IndexController@index')->name('index');
 
+    //管理员
     Route::group(['prefix' => '/account'], function(){
         Route::get('/index', 'AccountController@index')->name('account.index');
         Route::any('/password', 'AccountController@changePassword')->name('account.password');
@@ -42,6 +44,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'AccountController@del')->name('account.delete');
     });
 
+    //角色
     Route::group(['prefix' => '/role'], function(){
         Route::get('/index', 'RoleController@index')->name('role.index');
         Route::any('/create', 'RoleController@create')->name('role.create');
@@ -50,15 +53,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'RoleController@del')->name('role.delete');
     });
 
-    Route::group(['prefix' => '/merchant'], function(){
-        Route::get('/index', 'MerchantController@index')->name('merchant.index');
-        Route::any('/create', 'MerchantController@create')->name('merchant.create');
-        Route::post('/key', 'MerchantController@resetKey')->name('merchant.key');
-        Route::any('/password', 'MerchantController@resetPassword')->name('merchant.password');
-        Route::any('/security', 'MerchantController@resetSecurity')->name('merchant.security');
-        Route::any('/del', 'MerchantController@del')->name('merchant.delete');
-    });
-
+    //权限
     Route::group(['prefix' => '/permission'], function(){
         Route::get('/index', 'PermissionController@index')->name('permission.index');
         Route::post('/clear', 'PermissionController@clear')->name('permission.clear');
@@ -67,6 +62,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'PermissionController@del')->name('permission.delete');
     });
 
+    //菜单
     Route::group(['prefix' => '/menu'], function(){
         Route::get('/index', 'MenuController@index')->name('menu.index');
         Route::any('/create', 'MenuController@create')->name('menu.create');
@@ -74,7 +70,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'MenuController@del')->name('menu.delete');
     });
 
-    Route::get('test', 'TestController@index')->name('test');
-
+    //商户
+    Route::group(['prefix' => '/merchant'], function(){
+        Route::get('/index', 'MerchantController@index')->name('merchant.index');
+        Route::any('/create', 'MerchantController@create')->name('merchant.create');
+        Route::post('/key', 'MerchantController@resetKey')->name('merchant.key');
+        Route::any('/password', 'MerchantController@resetPassword')->name('merchant.password');
+        Route::any('/security', 'MerchantController@resetSecurity')->name('merchant.security');
+        Route::any('/del', 'MerchantController@del')->name('merchant.delete');
+    });
 
 });
