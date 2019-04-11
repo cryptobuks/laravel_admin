@@ -12,7 +12,7 @@ return [
     'admin/role/index'          => '角色列表',
     'admin/role/create'         => '添加角色',
     'admin/role/edit'           => '编辑角色',
-    'admin/role/set'            => '设置权限',
+    'admin/role/set'            => '设置权限页面',
     'admin/role/del'            => '删除角色',
 
     'admin/permission/index'    => '权限列表',
@@ -32,5 +32,11 @@ return [
     'admin/merchant/password'   => '重置商户登录密码',
     'admin/merchant/security'   => '重置商户资金密码',
     'admin/merchant/del'        => '删除商户',
+
+    'admin/payType/index'       => '支付通道列表',
+    'admin/payType/create'      => '添加支付通道',
+    'admin/payType/edit'        => '编辑支付通道',
+    'admin/payType/lock/{id}'   => '开启/关闭支付通道',
+    'admin/payType/del'         => '删除支付通道',
 
 ];
