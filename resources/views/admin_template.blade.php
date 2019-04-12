@@ -16,8 +16,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/bower_components/admin-lte/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/bower_components/admin-lte/dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro 改为用本地文件 -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('css/css.css') }}">
     <!-- Custom style -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     @yield('style')

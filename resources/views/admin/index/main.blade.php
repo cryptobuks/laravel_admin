@@ -1,6 +1,7 @@
 @extends('admin_template')
 @section('style')
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+    <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
 @stop
 @section('content')
     <section class="content">
