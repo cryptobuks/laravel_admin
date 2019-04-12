@@ -41,8 +41,8 @@
                                         <td>{{ $list['limit'] }}</td>
                                         <td>{{ $list['settle_type'] }}</td>
                                         <td>
-                                            <div style="width: 55px;height: 30px;" id="toggle-click">
-                                                <input type="checkbox" id="toggle-event" data-href="{{ $lockApi }}" @if($list['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                            <div style="width: 55px;height: 30px;" class="toggle-click">
+                                                <input type="checkbox" class="toggle-event" data-href="{{ $lockApi }}" @if($list['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
                                             </div>
                                         </td>
                                         <td>
@@ -67,8 +67,8 @@
     <script type="text/javascript">
         let $j = jQuery.noConflict();
 
-        $j('#toggle-click').click(function () {
-            let that = $j('#toggle-event');
+        $j('.toggle-click').click(function () {
+            let that = $j(this).find('.toggle-event');
             let lockApi = that.data('href');
             let val = that.prop('checked');
             if(val){
