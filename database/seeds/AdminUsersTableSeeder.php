@@ -17,6 +17,6 @@ class AdminUsersTableSeeder extends Seeder
         DB::table('menus')->truncate();
 
         User::create(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('123456')]);
-        User::create(['name' => 'winter', 'email' => 'winter@gmail.com', 'password' => bcrypt('123qweasd')]);
+//        User::create(['name' => 'winter', 'email' => 'winter@gmail.com', 'password' => bcrypt('123qweasd')]);
     }
 }
