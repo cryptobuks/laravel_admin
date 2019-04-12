@@ -34,7 +34,7 @@ class Menu
             $uri = $route->uri;
             $uriArray = explode('/',$uri);
 
-            if( isset($uriArray[0]) && $uriArray[0]=='admin' && count($uriArray)>1){
+            if( isset($uriArray[0]) && $uriArray[0]=='admin' && count($uriArray)>1 ){
                 $adminRoutes[] = $method.'_'.$name.'_'.$uri;
             }
         }
