@@ -48,5 +48,13 @@ class MenusTableSeeder extends Seeder
 
         Menu::create(['pid'=>$pay_pid, 'permission_id'=>$payTypeIndex, 'name'=>'支付通道', 'icon'=>'fa-cc-visa', 'group'=>'pay', 'sort'=>10]);
 
+        //交易管理菜单下:订单列表
+        Menu::create(['pid'=>0, 'permission_id'=>0, 'name'=>'交易管理', 'icon'=>'fa-book', 'group'=>'transaction', 'sort'=>30]);
+
+        $transaction_pid = Menu::query()->where('pid',0)->where('group','transaction')->pluck('id')->first();
+        $orderIndex = Permission::query()->where('name','order.index')->pluck('id')->first();
+
+        Menu::create(['pid'=>$transaction_pid, 'permission_id'=>$orderIndex, 'name'=>'订单列表', 'icon'=>'fa-inbox', 'group'=>'transaction', 'sort'=>10]);
+
     }
 }

@@ -39,4 +39,8 @@ return [
     'admin/payType/lock/{id}/{status}'  => '开启/关闭支付通道',
     'admin/payType/del'                 => '删除支付通道',
 
+    'admin/order/index'                 => '订单列表',
+    'admin/order/remedy/{id}'           => '补单操作',
+    'admin/order/detail/{id}'           => '订单详情',
+
 ];

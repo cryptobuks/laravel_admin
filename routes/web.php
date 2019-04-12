@@ -85,8 +85,15 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::get('/index', 'PayTypeController@index')->name('payType.index');
         Route::any('/create', 'PayTypeController@create')->name('payType.create');
         Route::any('/edit', 'PayTypeController@edit')->name('payType.edit');
-        Route::any('/lock/{id}/{status}', 'PayTypeController@lock')->name('payType.lock');
+        Route::post('/lock/{id}/{status}', 'PayTypeController@lock')->name('payType.lock');
         Route::any('/del', 'PayTypeController@del')->name('payType.delete');
+    });
+
+    //订单
+    Route::group(['prefix' => '/order'], function(){
+        Route::get('/index', 'OrderController@index')->name('order.index');
+        Route::any('/remedy/{id}', 'OrderController@remedy')->name('order.remedy');
+        Route::any('/detail/{id}', 'OrderController@detail')->name('order.detail');
     });
 
 });
