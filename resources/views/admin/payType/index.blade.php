@@ -73,7 +73,7 @@
             let val = that.prop('checked');
             if(val){
                 that.bootstrapToggle('off');
-                layer.confirm('是否确定开启此通道？', {
+                layer.confirm('是否确定关闭此通道？', {
                     skin: 'warning-class',
                     icon: 7,
                     title: false,
@@ -101,7 +101,7 @@
                 });
             } else {
                 that.bootstrapToggle('on');
-                layer.confirm('是否确定关闭此通道？', {
+                layer.confirm('是否确定开启此通道？', {
                     skin: 'warning-class',
                     icon: 7,
                     title: false,
