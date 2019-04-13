@@ -23,6 +23,7 @@ class CreatePayTypesTable extends Migration
             $table->decimal('max',8,2)->comment('单笔最大额度');
             $table->decimal('limit',10,2)->comment('当日交易限额');
             $table->string('settle_type')->comment('结算方式');
+            $table->smallInteger('sort')->default(100)->comment('排序(ASC)');
             $table->tinyInteger('status')->default(1)->comment('通道状态 0:未开通 1:已开通');
             $table->timestamps();
         });
