@@ -33,7 +33,7 @@ return [
     'admin/merchant/security'           => '重置商户资金密码',
     'admin/merchant/del'                => '删除商户',
 
-    'admin/payType/index'               => '支付通道列表',
+    'admin/payType/index'               => '支付通道',
     'admin/payType/create'              => '添加支付通道',
     'admin/payType/edit'                => '编辑支付通道',
     'admin/payType/lock/{id}/{status}'  => '开启/关闭支付通道',

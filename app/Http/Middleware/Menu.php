@@ -108,6 +108,7 @@ class Menu
         view()->share('menu_list', $menus);
         $path = $request->path();
         view()->share('request_path', '/'.$path);
+        view()->share('current_page_name', str_replace('页面', '', $constants[$path]));
 
         //当前组名,当前菜单名
         if( $current_perm->menu ){
