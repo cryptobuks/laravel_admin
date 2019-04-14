@@ -65,7 +65,8 @@
             padding-right:0
         }
         .form-horizontal .form-group{
-            margin-left: -25px;
+            margin-left: -61px;
+            margin-top:50px;
         }
         .form-group{
             margin-bottom: 30px;
@@ -91,7 +92,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><div class="login"></div></div>
+                {{--<div class="panel-heading"><div class="login"></div></div>--}}
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
