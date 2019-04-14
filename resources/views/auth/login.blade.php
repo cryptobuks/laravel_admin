@@ -14,17 +14,29 @@
             background-image:url("{{ asset('img/background.jpg') }}");
             background-size:cover;
         }
+
+        body:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            z-index: -1;
+        }
         .navbar-default{
             background-color: transparent;
         }
         .panel-default{
             width: 590px;
             height: 340px;
-            background-image: linear-gradient( to bottom right , #16CCF8,#6F425E,#6c71c4,#8677A7);
+            background-image: linear-gradient( to bottom right , #f2abf7,#6F427B,#6C71FE,#4134C9);
             box-shadow: 0 2px 18px #8A6D69;
             border:none;
             margin: 0 auto;
-            margin-top: 90px;
+            margin-top: 153px;
+            opacity:.9;
         }
         .panel-body{
             padding: 15px;
@@ -54,6 +66,9 @@
         }
         .form-horizontal .form-group{
             margin-left: -25px;
+        }
+        .form-group{
+            margin-bottom: 30px;
         }
         .btn{
             width:162px;
