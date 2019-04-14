@@ -72,9 +72,9 @@
             margin-bottom: 30px;
         }
         .btn{
-            width:162px;
-            height:36px;
-            margin-left: 16px;
+            width: 193px;
+            height: 36px;
+            margin-left: 24px;
             background: rgba(97, 128, 166,.7);
             border-color:darkgoldenrod;
             font-size: 15px;
