@@ -14,7 +14,7 @@
                                     </button>
                                 </div>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-secondary restore-permission" data-href="{{ route('permission.restore') }}" data-title="重置权限表">
+                                    <button type="button" class="btn btn-sm btn-orange restore-permission" data-href="{{ route('permission.restore') }}" data-title="重置权限表">
                                         <i class="fa fa-flash"></i> 重置权限表
                                     </button>
                                 </div>

@@ -40,7 +40,7 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning reset-key" data-href="{{ route('merchant.key',['id'=>$list['id']]) }}"><i class="fa fa-key"></i> 重置秘钥</button>
                                             <button type="button" class="btn btn-sm btn-info reset-password" data-href="{{ route('merchant.password',['id'=>$list['id']]) }}"><i class="fa fa-user"></i> 重置登录密码</button>
-                                            <button type="button" class="btn btn-sm btn-primary reset-security" data-href="{{ route('merchant.security',['id'=>$list['id']]) }}"><i class="fa fa-rmb"></i> 重置资金密码</button>
+                                            <button type="button" class="btn btn-sm btn-cyan reset-security" data-href="{{ route('merchant.security',['id'=>$list['id']]) }}"><i class="fa fa-rmb"></i> 重置资金密码</button>
                                             <button type="button" class="btn btn-sm btn-danger del-merchant" data-href="{{ route('merchant.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
