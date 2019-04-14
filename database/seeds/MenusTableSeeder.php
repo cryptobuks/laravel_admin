@@ -45,8 +45,10 @@ class MenusTableSeeder extends Seeder
 
         $pay_pid = Menu::query()->where('pid',0)->where('group','pay')->pluck('id')->first();
         $payTypeIndex = Permission::query()->where('name','payType.index')->pluck('id')->first();
+        $channelIndex = Permission::query()->where('name','channel.index')->pluck('id')->first();
 
         Menu::create(['pid'=>$pay_pid, 'permission_id'=>$payTypeIndex, 'name'=>'支付通道', 'icon'=>'fa-cc-visa', 'group'=>'pay', 'sort'=>10]);
+        Menu::create(['pid'=>$pay_pid, 'permission_id'=>$channelIndex, 'name'=>'支付列表', 'icon'=>'fa-paypal', 'group'=>'pay', 'sort'=>20]);
 
         //交易管理菜单下:订单列表
         Menu::create(['pid'=>0, 'permission_id'=>0, 'name'=>'交易管理', 'icon'=>'fa-book', 'group'=>'transaction', 'sort'=>40]);
