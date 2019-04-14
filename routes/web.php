@@ -89,6 +89,15 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/del', 'PayTypeController@del')->name('payType.delete');
     });
 
+    //支付列表
+    Route::group(['prefix' => '/channel'], function(){
+        Route::get('/index', 'ChannelController@index')->name('channel.index');
+        Route::any('/create', 'ChannelController@create')->name('channel.create');
+        Route::any('/edit', 'ChannelController@edit')->name('channel.edit');
+        Route::post('/lock/{id}/{status}', 'ChannelController@lock')->name('channel.lock');
+        Route::any('/del', 'ChannelController@del')->name('channel.delete');
+    });
+
     //订单
     Route::group(['prefix' => '/order'], function(){
         Route::get('/index', 'OrderController@index')->name('order.index');
