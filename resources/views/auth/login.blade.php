@@ -43,7 +43,6 @@
             height: 200px;
             width: 500px;
             margin: 0 auto;
-            margin-top: 32px;
         }
         .panel-default>.panel-heading{
             background: bottom;
@@ -66,8 +65,11 @@
         }
         .form-horizontal .form-group{
             margin-left: -61px;
+        }
+        .form-horizontal{
             margin-top:50px;
         }
+
         .form-group{
             margin-bottom: 30px;
         }
@@ -84,6 +86,9 @@
         }
         .btn:hover{
             color:goldenrod;
+        }
+        .help-block{
+            margin-bottom:0
         }
     </style>
 @stop
