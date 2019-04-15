@@ -12,8 +12,8 @@
                         <div class="card-header" style="height: 50px">
                             <div class="card-tools">
                                 <div class="input-group input-group-sm">
-                                    <button type="button" class="btn btn-sm btn-success create-payType" data-href="{{ route('channel.create') }}">
-                                        <i class="fa fa-gg"></i> 添加渠道
+                                    <button type="button" class="btn btn-sm btn-success create-channel" data-href="{{ route('channel.create') }}">
+                                        <i class="fa fa-skyatlas"></i> 添加渠道
                                     </button>
                                 </div>
                             </div>
@@ -23,32 +23,26 @@
                             <table class="table table-hover">
                                 <tr>
                                     <th>渠道名称</th>
-                                    <th>服务名</th>
-                                    <th>支付类型</th>
-                                    <th>商户信息</th>
-                                    <th>排序</th>
+                                    <th>服务名<i class="fa fa-arrow-right"></i>支付类型</th>
+                                    <th>排序(DESC)</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 @foreach($lists as $list)
-                                    <tr>
-                                        <td>{{ $list['title'] }}</td>
+                                    <tr class="font-weight-bold">
+                                        <td><i class="fa fa-pinterest-p"></i> {{ $list['title'] }}</td>
                                         <td>{{ $list['name'] }}</td>
-                                        <td></td>
-                                        <td>{{ $list['info'] }}</td>
                                         <td>{{ $list['sort'] }}</td>
-                                        <td></td>
+                                        <td>&nbsp;&nbsp;&nbsp;<i class="fa fa-info-circle"></i></td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
-                                            <button type="button" class="btn btn-sm btn-danger del-payType" data-href="{{ route('payType.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
+                                            <button type="button" class="btn btn-sm btn-info edit-channel" data-href="{{ route('channel.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                            <button type="button" class="btn btn-sm btn-danger del-channel" data-href="{{ route('channel.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
                                     @foreach($list->child_channel as $child_channel)
-                                        <tr>
-                                            <td>&emsp;&emsp;&emsp;{{ $child_channel['title'] }}</td>
-                                            <td>{{ $child_channel['name'] }}</td>
+                                        <tr class="text-muted">
+                                            <td>&emsp;&emsp;&nbsp;{{ $child_channel['title'] }}</td>
                                             <td>{{ $child_channel['pay_type'] }}</td>
-                                            <td>{{ $child_channel['info'] }}</td>
                                             <td>{{ $child_channel['sort'] }}</td>
                                             <td>
                                                 <div style="width: 55px;height: 30px;" class="toggle-click">
@@ -141,7 +135,7 @@
             }
         });
 
-        $j('.create-payType').click(function(){
+        $j('.create-channel').click(function(){
             let apiUrl = $j(this).data('href');
             $j.ajax({
                 url : apiUrl,
@@ -187,7 +181,7 @@
             });
         });
 
-        $j('.edit-payType').click(function(){
+        $j('.edit-channel').click(function(){
             let apiUrl = $j(this).data('href');
             $j.ajax({
                 url : apiUrl,
@@ -237,7 +231,7 @@
             });
         });
 
-        $j('.del-payType').click(function(){
+        $j('.del-channel').click(function(){
             let apiUrl = $j(this).data('href');
             layer.confirm('是否确定删除？', {
                 skin: 'warning-class',
