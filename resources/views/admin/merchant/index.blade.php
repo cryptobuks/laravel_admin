@@ -38,6 +38,7 @@
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>{{ $list['updated_at'] }}</td>
                                         <td>
+                                            <button type="button" class="btn btn-sm btn-blue set-rate" data-href="{{ route('merchant.rate',['id'=>$list['id']]) }}"><i class="fa fa-sliders"></i> 设置费率</button>
                                             <button type="button" class="btn btn-sm btn-warning reset-key" data-href="{{ route('merchant.key',['id'=>$list['id']]) }}"><i class="fa fa-key"></i> 重置秘钥</button>
                                             <button type="button" class="btn btn-sm btn-info reset-password" data-href="{{ route('merchant.password',['id'=>$list['id']]) }}"><i class="fa fa-user"></i> 重置登录密码</button>
                                             <button type="button" class="btn btn-sm btn-cyan reset-security" data-href="{{ route('merchant.security',['id'=>$list['id']]) }}"><i class="fa fa-rmb"></i> 重置资金密码</button>

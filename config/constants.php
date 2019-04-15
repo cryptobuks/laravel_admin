@@ -28,6 +28,7 @@ return [
 
     'admin/merchant/index'              => '商户列表',
     'admin/merchant/create'             => '添加商户',
+    'admin/merchant/rate'               => '设置商户费率',
     'admin/merchant/key'                => '重置商户密钥',
     'admin/merchant/password'           => '重置商户登录密码',
     'admin/merchant/security'           => '重置商户资金密码',

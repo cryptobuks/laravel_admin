@@ -74,6 +74,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     Route::group(['prefix' => '/merchant'], function(){
         Route::get('/index', 'MerchantController@index')->name('merchant.index');
         Route::any('/create', 'MerchantController@create')->name('merchant.create');
+        Route::any('/rate', 'MerchantController@resetKey')->name('merchant.rate');
         Route::post('/key', 'MerchantController@resetKey')->name('merchant.key');
         Route::any('/password', 'MerchantController@resetPassword')->name('merchant.password');
         Route::any('/security', 'MerchantController@resetSecurity')->name('merchant.security');
