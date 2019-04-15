@@ -49,4 +49,19 @@ return [
     'admin/order/remedy/{id}'           => '补单操作',
     'admin/order/detail/{id}'           => '订单详情',
 
+    'admin/bank/index'                  => '银行类别',
+    'admin/bank/create'                 => '添加银行类别',
+    'admin/bank/edit'                   => '编辑银行类别',
+    'admin/bank/lock/{id}/{status}'     => '启用/停用银行类别',
+    'admin/bank/del'                    => '删除银行类别',
+
+    'admin/bankcard/index'              => '银行卡列表',
+    'admin/bankcard/create'             => '添加银行卡',
+    'admin/bankcard/edit'               => '编辑银行卡',
+    'admin/bankcard/lock/{id}/{status}' => '绑定/解绑银行卡',
+    'admin/bankcard/del'                => '删除银行卡',
+
+    'admin/withdraw/index'              => '提现记录',
+    'admin/withdraw/accept'             => '提现审核通过',
+    'admin/withdraw/reject'             => '拒绝提现',
 ];

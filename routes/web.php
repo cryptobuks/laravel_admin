@@ -105,4 +105,29 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::any('/detail/{id}', 'OrderController@detail')->name('order.detail');
     });
 
+    //银行类别
+    Route::group(['prefix' => '/bank'], function(){
+        Route::get('/index', 'BankController@index')->name('bank.index');
+        Route::any('/create', 'BankController@create')->name('bank.create');
+        Route::any('/edit', 'BankController@edit')->name('bank.edit');
+        Route::post('/lock/{id}/{status}', 'BankController@lock')->name('bank.lock');
+        Route::any('/del', 'BankController@del')->name('bank.delete');
+    });
+
+    //银行卡列表
+    Route::group(['prefix' => '/bankcard'], function(){
+        Route::get('/index', 'BankcardController@index')->name('bankcard.index');
+        Route::any('/create', 'BankcardController@create')->name('bankcard.create');
+        Route::any('/edit', 'BankcardController@edit')->name('bankcard.edit');
+        Route::post('/lock/{id}/{status}', 'BankcardController@lock')->name('bankcard.lock');
+        Route::any('/del', 'BankcardController@del')->name('bankcard.delete');
+    });
+
+    //提现记录
+    Route::group(['prefix' => '/withdraw'], function(){
+        Route::get('/index', 'WithdrawController@index')->name('withdraw.index');
+        Route::post('/accept', 'WithdrawController@lock')->name('withdraw.accept');
+        Route::any('/reject', 'WithdrawController@lock')->name('withdraw.reject');
+    });
+
 });

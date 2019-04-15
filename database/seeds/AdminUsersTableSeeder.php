@@ -14,7 +14,7 @@ class AdminUsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('menus')->truncate();
+        DB::table('admin_users')->truncate();
 
         User::create(['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => bcrypt('123456')]);
 //        User::create(['name' => 'winter', 'email' => 'winter@gmail.com', 'password' => bcrypt('123qweasd')]);
