@@ -49,7 +49,7 @@ class MenusTableSeeder extends Seeder
         $payTypeIndex = Permission::query()->where('name','payType.index')->pluck('id')->first();
         $channelIndex = Permission::query()->where('name','channel.index')->pluck('id')->first();
 
-        Menu::create(['pid'=>$pay_pid, 'permission_id'=>$payTypeIndex, 'name'=>'支付通道', 'icon'=>'fa-cc-visa', 'group'=>'pay', 'sort'=>10]);
+        Menu::create(['pid'=>$pay_pid, 'permission_id'=>$payTypeIndex, 'name'=>'支付通道', 'icon'=>'fa-cc-mastercard', 'group'=>'pay', 'sort'=>10]);
         Menu::create(['pid'=>$pay_pid, 'permission_id'=>$channelIndex, 'name'=>'支付列表', 'icon'=>'fa-paypal', 'group'=>'pay', 'sort'=>20]);
 
 
@@ -71,7 +71,7 @@ class MenusTableSeeder extends Seeder
         $withdrawIndex = Permission::query()->where('name','withdraw.index')->pluck('id')->first();
 
         Menu::create(['pid'=>$fund_pid, 'permission_id'=>$bankIndex, 'name'=>'银行类别', 'icon'=>'fa-bank', 'group'=>'fund', 'sort'=>10]);
-        Menu::create(['pid'=>$fund_pid, 'permission_id'=>$bankcardIndex, 'name'=>'银行卡列表', 'icon'=>'fa-cc-mastercard', 'group'=>'fund', 'sort'=>20]);
+        Menu::create(['pid'=>$fund_pid, 'permission_id'=>$bankcardIndex, 'name'=>'银行卡列表', 'icon'=>'fa-cc-visa', 'group'=>'fund', 'sort'=>20]);
         Menu::create(['pid'=>$fund_pid, 'permission_id'=>$withdrawIndex, 'name'=>'提现记录', 'icon'=>'fa-won', 'group'=>'fund', 'sort'=>30]);
 
     }
