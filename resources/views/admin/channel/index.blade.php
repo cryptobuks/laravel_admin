@@ -22,34 +22,45 @@
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <tr>
-                                    <th>通道名称</th>
+                                    <th>渠道名称</th>
+                                    <th>服务名</th>
                                     <th>支付类型</th>
-                                    <th>交易费率</th>
-                                    <th>单笔限额</th>
-                                    <th>当日交易限额</th>
-                                    <th>结算方式</th>
-                                    <th>通道状态</th>
+                                    <th>商户信息</th>
+                                    <th>排序</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 @foreach($lists as $list)
-                                    @php $lockApi = $list['status'] == 1 ? route('payType.lock',[$list['id'],0]) : route('payType.lock',[$list['id'],1]); @endphp
                                     <tr>
+                                        <td>{{ $list['title'] }}</td>
                                         <td>{{ $list['name'] }}</td>
-                                        <td>{{ $list['pay_type'] }}</td>
-                                        <td>{{ $list['rate'] }}</td>
-                                        <td>{{ $list['min'] }} - {{ $list['max'] }}</td>
-                                        <td>{{ $list['limit'] }}</td>
-                                        <td>{{ $list['settle_type'] }}</td>
-                                        <td>
-                                            <div style="width: 55px;height: 30px;" class="toggle-click">
-                                                <input type="checkbox" class="toggle-event" data-href="{{ $lockApi }}" @if($list['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
-                                            </div>
-                                        </td>
+                                        <td></td>
+                                        <td>{{ $list['info'] }}</td>
+                                        <td>{{ $list['sort'] }}</td>
+                                        <td></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
                                             <button type="button" class="btn btn-sm btn-danger del-payType" data-href="{{ route('payType.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                         </td>
                                     </tr>
+                                    @foreach($list->child_channel as $child_channel)
+                                        <tr>
+                                            <td>&emsp;&emsp;&emsp;{{ $child_channel['title'] }}</td>
+                                            <td>{{ $child_channel['name'] }}</td>
+                                            <td>{{ $child_channel['pay_type'] }}</td>
+                                            <td>{{ $child_channel['info'] }}</td>
+                                            <td>{{ $child_channel['sort'] }}</td>
+                                            <td>
+                                                <div style="width: 55px;height: 30px;" class="toggle-click">
+                                                    <input type="checkbox" class="toggle-event" data-href="" @if($child_channel['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$child_channel['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                                <button type="button" class="btn btn-sm btn-danger del-payType" data-href="{{ route('payType.delete',['id'=>$child_channel['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </table>
                         </div>

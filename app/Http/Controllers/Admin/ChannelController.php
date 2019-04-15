@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class ChannelController extends Controller
 {
     public function index(){
-        $lists = Channel::all()->toArray();
+        $lists = Channel::getTopChannels();
         $viewData = [
             'lists'             => $lists,
             'page_title'        => '支付列表',

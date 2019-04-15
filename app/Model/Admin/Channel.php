@@ -27,4 +27,14 @@ class Channel extends Model
      */
     protected $visible = ['id', 'pid', 'title', 'name', 'pay_type', 'info', 'sort', 'status'];
 
+    public static function getTopChannels(){
+        return self::with('child_channel')->where('pid',0)->orderBy('sort','desc')->get();
+    }
+
+    public function child_channel(){
+        $relation = $this->hasMany('\App\Model\Admin\Channel','pid','id');
+        $relation->orderBy('sort','asc');
+        return $relation;
+    }
+
 }
