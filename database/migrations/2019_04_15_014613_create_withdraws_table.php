@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -24,6 +25,7 @@ class CreateWithdrawsTable extends Migration
             $table->string('remark')->comment('备注');
             $table->timestamps();
         });
+        DB::statement("alter table `withdraws` comment '提现记录'");
     }
 
     /**
