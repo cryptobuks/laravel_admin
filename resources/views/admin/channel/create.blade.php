@@ -1,36 +1,43 @@
 <form role="form">
     <div class="card-body">
         <div class="form-group">
-            <label for="name">通道名称</label>
-            <input type="text" class="form-control" name="name" placeholder="请输入通道名称" autofocus>
+            <label for="pid">父级</label>
+            <select class="form-control" id="pid" name="pid">
+                <option value="0" @if(empty($pid)) selected="selected" @endif>顶级</option>
+                @foreach($topChannels as $channel)
+                    <option value="{{$channel['id']}}" @if(isset($pid) && $pid == $channel['id']) selected="selected" @endif>{{$channel['title']}}</option>
+                @endforeach
+            </select>
         </div>
+
         <div class="form-group">
-            <label for="pay_type">支付类型</label>
-            <input type="text" class="form-control" name="pay_type" placeholder="请输入支付类型">
+            <label for="title">渠道名称</label>
+            <input type="text" class="form-control" name="title" placeholder="请输入渠道名称">
         </div>
-        <div class="form-group">
-            <label for="rate">交易费率(百分比%)</label>
-            <input type="text" class="form-control" name="rate" placeholder="请输入交易费率(小数)">
+
+        <!-- 点击添加时无$pid或者编辑顶级时$pid==0,此时不显示此下拉框 -->
+        <div class="form-group @if( !isset($pid) || (isset($pid) && ($pid==0)) ) hide @endif">
+            <label for="pay_type">支付类型<small>(通道)</small></label>
+            <select class="form-control" id="pay_type" name="pay_type">
+                @foreach($payTypes as $type)
+                    <option value="{{$type['pay_type']}}" @if(isset($pay_type) && $pay_type == $type['pay_type']) selected="selected" @endif>{{$type['name']}}</option>
+                @endforeach
+            </select>
         </div>
+
         <div class="form-group">
-            <label for="min">单笔最小额度</label>
-            <input type="text" class="form-control" name="min" placeholder="请输入最小额度">
+            <label for="name">服务名<small>(开发者填写)</small></label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="请输入服务名称">
         </div>
+
         <div class="form-group">
-            <label for="max">单笔最大额度</label>
-            <input type="text" class="form-control" name="max" placeholder="请输入最大额度">
+            <label for="sort">排序<small>(顶级DESC,子级ASC)</small></label>
+            <input type="text" class="form-control" name="sort" placeholder="请输入序号">
         </div>
+
         <div class="form-group">
-            <label for="limit">当日交易限额</label>
-            <input type="text" class="form-control" name="limit" placeholder="请输入限制额度">
-        </div>
-        <div class="form-group">
-            <label for="settle_type">结算方式</label>
-            <input type="text" class="form-control" name="settle_type" placeholder="请输入结算方式">
-        </div>
-        <div class="form-group">
-            <label for="status">通道状态</label>
-            <input type="text" class="form-control" name="status" placeholder="请输入通道状态">
+            <label for="status">状态</label>
+            <input type="text" class="form-control" name="status" placeholder="请输入状态">
         </div>
     </div>
     <!-- /.card-body -->

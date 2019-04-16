@@ -35,6 +35,7 @@ class TestDataSeeder extends Seeder
         PayType::create(['name'=>'支付宝H5', 'pay_type'=>'alipay_h5', 'rate'=>'2.5', 'min'=>'10', 'max'=>'3000', 'limit'=>'300000', 'settle_type'=>'D0', 'status'=>'1']);
         PayType::create(['name'=>'微信扫码', 'pay_type'=>'wechat_qr', 'rate'=>'3.8', 'min'=>'1', 'max'=>'2000', 'limit'=>'500000', 'settle_type'=>'T1', 'status'=>'0']);
         PayType::create(['name'=>'微信H5', 'pay_type'=>'wechat_h5', 'rate'=>'3.8', 'min'=>'1', 'max'=>'5000', 'limit'=>'500000', 'settle_type'=>'T1', 'status'=>'1']);
+        PayType::create(['name'=>'银联卡', 'pay_type'=>'union_pay', 'rate'=>'1.6', 'min'=>'100', 'max'=>'50000', 'limit'=>'500000', 'settle_type'=>'T1', 'status'=>'1']);
 
         DB::table('channels')->truncate();
         Channel::create(['pid'=>'0', 'title'=>'汇丰支付', 'name'=>'HFpay', 'pay_type'=>'null', 'info'=>'null', 'sort'=>'10', 'status'=>'1']);

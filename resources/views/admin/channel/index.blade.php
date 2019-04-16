@@ -50,8 +50,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-info edit-payType" data-href="{{ route('payType.edit',['id'=>$child_channel['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
-                                                <button type="button" class="btn btn-sm btn-danger del-payType" data-href="{{ route('payType.delete',['id'=>$child_channel['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
+                                                <button type="button" class="btn btn-sm btn-info edit-channel" data-href="{{ route('channel.edit',['id'=>$child_channel['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
+                                                <button type="button" class="btn btn-sm btn-danger del-channel" data-href="{{ route('channel.delete',['id'=>$child_channel['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -143,7 +143,7 @@
                 dataType : "html",
                 success: function(data){
                     layer.open({
-                        title: '添加通道',
+                        title: '添加渠道',
                         content: data,
                         type: 1,
                         offset: '0px',
@@ -172,6 +172,16 @@
                         },
                         btn2: function () {
                             layer.close();
+                        }
+                    });
+                    $j("#pid").change(function(){
+                        let pid = $j(this).val();
+                        if( pid === '0' ){
+                            $j('#name').parent().removeClass('hide'); //顶级菜单显示服务名
+                            $j('#pay_type').parent().addClass('hide'); //顶级菜单隐藏支付类型(通道)
+                        } else {
+                            $j('#name').parent().addClass('hide'); //子菜单隐藏服务名
+                            $j('#pay_type').parent().removeClass('hide');//子菜单显示支付类型(通道)
                         }
                     });
                 },
