@@ -25,10 +25,8 @@ class ChannelController extends Controller
             $data = $request->all();
             if( $data['pid'] == 0 ){
                 $data['pay_type'] = "null";
-                $data['info'] = "gateway/merchant/key";
             } else {
                 $data['name'] = "null";
-                $data['info'] = "null";
             }
             $rules = [
                 'pid'       => 'required',
@@ -60,6 +58,7 @@ class ChannelController extends Controller
             if( $validator->fails() ){
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
+            $data['info'] = "null";
             try{
                 Channel::create($data);
                 return response()->json(['status' => 0, 'message' => "添加成功"]);
@@ -78,11 +77,8 @@ class ChannelController extends Controller
         if( $request->isMethod('post') ){
             if( $data['pid'] == 0 ){
                 $data['pay_type'] = "null";
-                $info = ['gateway'=>'https://www.baidu.com:8888/api/order/build.html', 'merchant'=>'686888', 'key'=>'zlji4f58a68uzx5df5asdf2f22222fas'];
-                $data['info'] = json_encode($info,320);
             } else {
                 $data['name'] = "null";
-                $data['info'] = "null";
             }
             $rules = [
                 'pid'       => 'required',
@@ -125,6 +121,49 @@ class ChannelController extends Controller
         $data['topChannels'] = Channel::getTopChannels();
         $data['payTypes'] = PayType::query()->where('status',1)->get()->toArray();
         return view('admin.channel.create_and_edit')->with($data);
+    }
+
+    public function info(Request $request){
+        $data = $request->all();
+        if( $request->isMethod('post') ){
+            $rules = [
+                'id'        => 'required|not_in:0',
+                'gateway'   => 'required|string|min:3|max:200',
+                'merchant'  => 'required|string|min:2|max:100',
+                'key'       => 'required|string|min:2|max:100'
+            ];
+            $messages = [
+                'required'  => ":attribute不能为空",
+                'not_in'    => ":attribute错误",
+                'string'    => ":attribute需为字符串",
+                'min'       => ":attribute最少:min个字符",
+                'max'       => ":attribute最多:max个字符"
+            ];
+            $attributes = [
+                'id'        => '支付类型ID',
+                'gateway'   => '支付网关',
+                'merchant'  => '商户号',
+                'key'       => '商户秘钥'
+            ];
+            $validator = Validator::make($data, $rules, $messages, $attributes);
+            if( $validator->fails() ){
+                return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
+            }
+            try{
+                $channelInfo = $data;
+                unset($channelInfo['id']);
+                $channelInfo = json_encode($channelInfo,320);
+                Channel::query()->where('id',$data['id'])->update(['info'=>$channelInfo]);
+                return response()->json(['status' => 0, 'message' => "修改成功"]);
+            } catch (\Exception $e){
+                return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+            }
+        }
+        $channelInfo = Channel::query()->where('id',$data['id'])->pluck('info')->first();
+        if( $channelInfo != "null" ){
+            $data = array_merge($data, json_decode($channelInfo,true));
+        }
+        return view('admin.channel.info')->with($data);
     }
 
     public function del(Request $request){

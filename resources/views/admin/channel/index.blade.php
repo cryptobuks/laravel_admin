@@ -39,7 +39,7 @@
                                         <td><i class="fa fa-pinterest-p"></i> {{ $list['title'] }}</td>
                                         <td>{{ $list['name'] }}</td>
                                         <td>{{ $list['sort'] }}</td>
-                                        <td><i class="fa fa-info-circle show-tips" data-content="{{ $list['info'] }}" style="cursor: pointer;margin-left: 10px"></i></td>
+                                        <td><i class="fa fa-info-circle show-tips" data-content="{{ $list['info'] }}" data-href="{{ route('channel.info',['id'=>$list['id']]) }}" style="cursor: pointer;margin-left: 10px"></i></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-channel" data-href="{{ route('channel.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
                                             <button type="button" class="btn btn-sm btn-danger del-channel" data-href="{{ route('channel.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
@@ -80,12 +80,61 @@
         
         $j('.show-tips').mouseover(function () {
             let channelInfo = $j(this).data('content');
+            if(!channelInfo){
+                return false;
+            }
             let tipsDetail = "网关："+channelInfo['gateway']+"</br>商户号："+channelInfo['merchant']+"</br>秘钥："+strHide(channelInfo['key'],8,8);
             layer.tips(tipsDetail, this, {
                 tips: [4, '#17a2b8'],
                 area: 'auto',
                 maxWidth: '1000',
                 time: 5000,
+            });
+        });
+
+        $j('.show-tips').click(function () {
+            let apiUrl = $j(this).data('href');
+            $j.ajax({
+                url : apiUrl,
+                type : "get",
+                dataType : "html",
+                success: function(data){
+                    layer.open({
+                        title: '编辑支付渠道信息',
+                        content: data,
+                        type: 1,
+                        offset: '100px',
+                        area: '500px',
+                        closeBtn: 0,
+                        shadeClose: true,
+                        fixed: false,
+                        btn: ['确定','取消'],
+                        yes: function () {
+                            $j.ajax({
+                                url : apiUrl,
+                                type : "post",
+                                data : $j('form').serialize(),
+                                success: function(data){
+                                    if(data.status === 0){
+                                        layer.msg(data.message, {icon: 6});
+                                        window.location.reload();
+                                    }else{
+                                        layer.msg(data.message, {icon: 5});
+                                    }
+                                },
+                                error: function(e){
+                                    layer.msg(e.statusText, {icon: 2})
+                                }
+                            });
+                        },
+                        btn2: function () {
+                            layer.close();
+                        }
+                    });
+                },
+                error: function(e){
+                    layer.msg(e.statusText, {icon: 2})
+                }
             });
         });
 
@@ -163,7 +212,7 @@
                         title: '添加渠道',
                         content: data,
                         type: 1,
-                        offset: '0px',
+                        offset: '100px',
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,
@@ -219,7 +268,7 @@
                         title: '编辑',
                         content: data,
                         type: 1,
-                        offset: '0px',
+                        offset: '100px',
                         area: '500px',
                         closeBtn: 0,
                         shadeClose: true,

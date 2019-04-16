@@ -45,6 +45,7 @@ return [
         'admin/channel/index'               => '支付列表',
         'admin/channel/create'              => '添加支付渠道',
         'admin/channel/edit'                => '编辑支付渠道',
+        'admin/channel/info'                => '编辑渠道信息',
         'admin/channel/lock/{id}/{status}'  => '开启/关闭支付渠道',
         'admin/channel/del'                 => '删除支付渠道',
 

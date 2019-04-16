@@ -95,6 +95,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
         Route::get('/index', 'ChannelController@index')->name('channel.index');
         Route::any('/create', 'ChannelController@create')->name('channel.create');
         Route::any('/edit', 'ChannelController@edit')->name('channel.edit');
+        Route::any('/info', 'ChannelController@info')->name('channel.info');
         Route::post('/lock/{id}/{status}', 'ChannelController@lock')->name('channel.lock');
         Route::any('/del', 'ChannelController@del')->name('channel.delete');
     });
