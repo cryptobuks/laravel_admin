@@ -37,12 +37,11 @@
             <input type="text" class="form-control" name="sort" placeholder="请输入序号" value="{{$sort or $maxSort}}">
         </div>
 
-        <div class="form-group">
-            <label for="status">状态</label>
-            <div>
-                <input type="hidden" class="form-control" name="status" value="{{$status or 1}}">
-                <input type="checkbox" id="channel-status" @if(isset($status) && $status==0) @else checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-onstyle="success" data-offstyle="danger">
-            </div>
+        <!-- 点击添加时无$pid或者编辑顶级时$pid==0,此时不显示状态按钮 -->
+        <div class="form-group @if( !isset($pid) || (isset($pid) && ($pid==0)) ) hide @endif">
+            <label for="status">状态</label><br>
+            <input type="hidden" class="form-control" id="status" name="status" value="{{$status or 1}}">
+            <input type="checkbox" id="channel-status" @if(isset($status) && $status==0) @else checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-onstyle="success" data-offstyle="danger">
         </div>
     </div>
     <!-- /.card-body -->
