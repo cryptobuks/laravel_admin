@@ -120,8 +120,7 @@ class ChannelController extends Controller
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
             }
         }
-        $channel = Channel::find($data['id']);
-        $data = $channel->toArray();
+        $data = Channel::find($data['id'])->toArray();
         $data['topChannels'] = Channel::getTopChannels();
         $data['payTypes'] = PayType::query()->where('status',1)->get()->toArray();
         return view('admin.channel.create_and_edit')->with($data);
