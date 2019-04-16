@@ -38,9 +38,9 @@ class PermissionsTableSeeder extends Seeder
             }
         }
 
-        $constants = config('constants');
+        $constants = config('constants.route');
 
-        //差集为新加入路由文件中的路由,新路由查询和入库
+        //路由集里所有的路由项全部入库
         foreach ($adminRoutes as $key => $value) {
             $permArray = explode('_', $value);
             $description = isset($constants[$permArray[2]]) ? $constants[$permArray[2]] : "null";

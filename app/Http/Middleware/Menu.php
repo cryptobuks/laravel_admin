@@ -45,7 +45,7 @@ class Menu
             $adminRoutes = array_diff($adminRoutes, $routeCache);//注意参数顺序
         }
 
-        $constants = config('constants');
+        $constants = config('constants.route');
 
         //差集为新加入路由文件中的路由,新路由查询和入库
         foreach ($adminRoutes as $key => $value) {
