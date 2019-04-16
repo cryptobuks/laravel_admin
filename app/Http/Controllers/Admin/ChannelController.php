@@ -127,4 +127,18 @@ class ChannelController extends Controller
         return view('admin.channel.create_and_edit')->with($data);
     }
 
+    public function del(Request $request){
+        $data = $request->all();
+        try{
+            $channel = Channel::find($data['id']);
+            if($channel['pid'] == 0){
+                Channel::query()->where('pid',$channel['id'])->delete();
+            }
+            Channel::destroy($data['id']);
+            return response()->json(['status' => 0, 'message' => '删除成功']);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
+    }
+
 }

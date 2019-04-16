@@ -120,7 +120,12 @@ class MenuController extends Controller
     public function del(Request $request){
         $data = $request->all();
         try{
-            Menu::destroy($data['id']);
+            $menu = Menu::find($data['id']);
+            if($menu['pid'] == 0){
+                Menu::query()->where('group',$menu['group'])->delete();
+            } else {
+                Menu::destroy($data['id']);
+            }
             return response()->json(['status' => 0, 'message' => '删除成功']);
         } catch (\Exception $e){
             return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
