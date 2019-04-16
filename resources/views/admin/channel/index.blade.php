@@ -1,6 +1,12 @@
 @extends('admin_template')
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
+    <style>
+        small {
+            font-size: 12px;
+            font-weight: 200
+        }
+    </style>
 @stop
 @section('content')
     <section class="content">
@@ -230,10 +236,20 @@
                             layer.close();
                         }
                     });
+                    $j("#pid").change(function(){
+                        let pid = $j(this).val();
+                        if( pid === '0' ){
+                            $j('#name').parent().removeClass('hide'); //顶级菜单显示服务名
+                            $j('#pay_type').parent().addClass('hide'); //顶级菜单隐藏支付类型(通道)
+                        } else {
+                            $j('#name').parent().addClass('hide'); //子菜单隐藏服务名
+                            $j('#pay_type').parent().removeClass('hide');//子菜单显示支付类型(通道)
+                        }
+                    });
                     $j('#pay-type-status').bootstrapToggle();
                     $j('#pay-type-status').change(function() {
                         $j("input[name='status']").val($j(this).prop('checked') ? 1 : 0);
-                    })
+                    });
                 },
                 error: function(e){
                     layer.msg(e.statusText, {icon: 2})

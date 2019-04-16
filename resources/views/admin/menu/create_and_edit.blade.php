@@ -26,7 +26,7 @@
             <input type="text" class="form-control" name="name" placeholder="请输入菜单名称" value="{{$name or null}}">
         </div>
 
-        <!-- 编辑子菜单时$pid存在且大于0,此时不显示此下拉框 -->
+        <!-- 编辑子菜单时$pid存在且大于0,此时不显示此文本框 -->
         <div class="form-group @if(isset($pid) && $pid>0) hide @endif">
             <label for="group">分组</label>
             <input type="text" class="form-control" id="group" name="group" placeholder="请输入分组标志" value="{{$group or null}}">
