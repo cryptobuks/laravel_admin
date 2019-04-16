@@ -67,6 +67,6 @@ return [
         'admin/withdraw/index'              => '提现记录',
         'admin/withdraw/accept'             => '提现审核通过',
         'admin/withdraw/reject'             => '拒绝提现',
-    ]
+    ],
 
 ];

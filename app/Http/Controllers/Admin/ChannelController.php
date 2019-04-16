@@ -78,7 +78,8 @@ class ChannelController extends Controller
         if( $request->isMethod('post') ){
             if( $data['pid'] == 0 ){
                 $data['pay_type'] = "null";
-                $data['info'] = "gateway/merchant/key";
+                $info = ['gateway'=>'https://www.baidu.com:8888/api/order/build.html', 'merchant'=>'686888', 'key'=>'zlji4f58a68uzx5df5asdf2f22222fas'];
+                $data['info'] = json_encode($info,320);
             } else {
                 $data['name'] = "null";
                 $data['info'] = "null";

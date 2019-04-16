@@ -39,7 +39,7 @@
                                         <td><i class="fa fa-pinterest-p"></i> {{ $list['title'] }}</td>
                                         <td>{{ $list['name'] }}</td>
                                         <td>{{ $list['sort'] }}</td>
-                                        <td>&nbsp;&nbsp;&nbsp;<i class="fa fa-info-circle"></i></td>
+                                        <td><i class="fa fa-info-circle show-tips" data-content="{{ $list['info'] }}" style="cursor: pointer;margin-left: 10px"></i></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-channel" data-href="{{ route('channel.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
                                             <button type="button" class="btn btn-sm btn-danger del-channel" data-href="{{ route('channel.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
@@ -77,6 +77,17 @@
     <script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
     <script type="text/javascript">
         let $j = jQuery.noConflict();
+        
+        $j('.show-tips').mouseover(function () {
+            let channelInfo = $j(this).data('content');
+            let tipsDetail = "网关："+channelInfo['gateway']+"</br>商户号："+channelInfo['merchant']+"</br>秘钥："+strHide(channelInfo['key'],8,8);
+            layer.tips(tipsDetail, this, {
+                tips: [4, '#17a2b8'],
+                area: 'auto',
+                maxWidth: '1000',
+                time: 5000,
+            });
+        });
 
         $j('.toggle-click').click(function () {
             let that = $j(this).find('.toggle-event');
@@ -286,6 +297,15 @@
                 });
             });
         });
+
+        function strHide (str, frontLen, endLen) {
+            let len = str.length - frontLen - endLen;
+            let hideStr = '';
+            for (let i=0; i<len; i++) {
+                hideStr += '*';
+            }
+            return str.substring(0,frontLen) + hideStr + str.substring(str.length - endLen);
+        }
 
     </script>
 @stop
