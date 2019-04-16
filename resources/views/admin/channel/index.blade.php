@@ -251,6 +251,10 @@
                             $j('#pay_type').parent().removeClass('hide');//子菜单显示支付类型(通道)
                         }
                     });
+                    $j('#channel-status').bootstrapToggle();
+                    $j('#channel-status').change(function() {
+                        $j("input[name='status']").val($j(this).prop('checked') ? 1 : 0);
+                    })
                 },
                 error: function(e){
                     layer.msg(e.statusText, {icon: 2})
@@ -307,10 +311,10 @@
                             $j('#pay_type').parent().removeClass('hide');//子菜单显示支付类型(通道)
                         }
                     });
-                    $j('#pay-type-status').bootstrapToggle();
-                    $j('#pay-type-status').change(function() {
+                    $j('#channel-status').bootstrapToggle();
+                    $j('#channel-status').change(function() {
                         $j("input[name='status']").val($j(this).prop('checked') ? 1 : 0);
-                    });
+                    })
                 },
                 error: function(e){
                     layer.msg(e.statusText, {icon: 2})

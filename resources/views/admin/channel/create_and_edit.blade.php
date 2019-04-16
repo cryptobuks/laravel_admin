@@ -39,7 +39,10 @@
 
         <div class="form-group">
             <label for="status">状态</label>
-            <input type="text" class="form-control" name="status" placeholder="请输入状态" value="{{$status or null}}">
+            <div>
+                <input type="hidden" class="form-control" name="status" value="{{$status or 1}}">
+                <input type="checkbox" id="channel-status" @if(isset($status) && $status==0) @else checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-onstyle="success" data-offstyle="danger">
+            </div>
         </div>
     </div>
     <!-- /.card-body -->
