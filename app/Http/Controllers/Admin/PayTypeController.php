@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Admin\PayType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class PayTypeController extends Controller
@@ -54,6 +55,8 @@ class PayTypeController extends Controller
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
             try{
+                Redis::select(8);
+                Redis::hSet('pay_type', $data['pay_type'], $data['status']);
                 PayType::create($data);
                 return response()->json(['status' => 0, 'message' => "添加成功"]);
             } catch (\Exception $e){
@@ -65,6 +68,7 @@ class PayTypeController extends Controller
 
     public function edit(Request $request){
         $data = $request->all();
+        $payType = PayType::find($data['id']);
         if( $request->isMethod('post') ){
             $rules = [
                 'name'        => 'required|string|min:2|max:100|unique:pay_types,name,'.$data['id'],
@@ -99,6 +103,11 @@ class PayTypeController extends Controller
                 return response()->json(['status' => 10002, 'message' => $validator->errors()->first()]);
             }
             try{
+                Redis::select(8);
+                if( $data['pay_type'] != $payType->pay_type ){
+                    Redis::hDel('pay_type', $payType->pay_type);
+                }
+                Redis::hSet('pay_type', $data['pay_type'], $data['status']);
                 PayType::where('id',$data['id'])->update($data);
                 return response()->json(['status' => 0, 'message' => "修改成功"]);
             } catch (\Exception $e){
@@ -106,14 +115,17 @@ class PayTypeController extends Controller
             }
         }
         if($data['id'] > 0){
-            $data = PayType::find($data['id'])->toArray();
+            $data = $payType->toArray();
         }
         return view('admin.payType.edit')->with($data);
     }
 
     public function lock($id, $status){
         try{
-            PayType::where('id',$id)->update(['status'=>$status]);
+            $payType = PayType::find($id);
+            Redis::select(8);
+            Redis::hSet('pay_type', $payType->pay_type, $status);
+            PayType::query()->where('id',$id)->update(['status'=>$status]);
             $message = $status == 1 ? "通道开启成功" : "通道关闭成功";
             return response()->json(['status' => 0, 'message' => $message]);
         } catch (\Exception $e){
@@ -124,6 +136,9 @@ class PayTypeController extends Controller
     public function del(Request $request){
         $data = $request->all();
         try{
+            $payType = PayType::find($data['id']);
+            Redis::select(8);
+            Redis::hDel('pay_type', $payType->pay_type);
             PayType::destroy($data['id']);
             return response()->json(['status' => 0, 'message' => '删除成功']);
         } catch (\Exception $e){
