@@ -166,6 +166,16 @@ class ChannelController extends Controller
         return view('admin.channel.info')->with($data);
     }
 
+    public function lock($id, $status){
+        try{
+            Channel::where('id',$id)->update(['status'=>$status]);
+            $message = $status == 1 ? "支付渠道开启成功" : "支付渠道关闭成功";
+            return response()->json(['status' => 0, 'message' => $message]);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
+    }
+
     public function del(Request $request){
         $data = $request->all();
         try{

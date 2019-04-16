@@ -46,13 +46,14 @@
                                         </td>
                                     </tr>
                                     @foreach($list->child_channel as $child_channel)
+                                        @php $lockApi = $child_channel['status'] == 1 ? route('channel.lock',[$child_channel['id'],0]) : route('channel.lock',[$child_channel['id'],1]); @endphp
                                         <tr class="text-muted">
                                             <td>&emsp;&emsp;&nbsp;{{ $child_channel['title'] }}</td>
                                             <td>{{ $child_channel['pay_type'] }}</td>
                                             <td>{{ $child_channel['sort'] }}</td>
                                             <td>
                                                 <div style="width: 55px;height: 30px;" class="toggle-click">
-                                                    <input type="checkbox" class="toggle-event" data-href="" @if($child_channel['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                                    <input type="checkbox" class="toggle-event" data-href="{{ $lockApi }}" @if($child_channel['status']==1) checked @endif data-toggle="toggle" data-on="开启" data-off="关闭" data-size="small" data-height="20" data-widget="60" data-onstyle="success" data-offstyle="danger" data-style="ios">
                                                 </div>
                                             </td>
                                             <td>
@@ -144,7 +145,7 @@
             let val = that.prop('checked');
             if(val){
                 that.bootstrapToggle('off');
-                layer.confirm('是否确定关闭此通道？', {
+                layer.confirm('确定关闭此支付渠道？', {
                     skin: 'warning-class',
                     icon: 7,
                     title: false,
@@ -172,7 +173,7 @@
                 });
             } else {
                 that.bootstrapToggle('on');
-                layer.confirm('是否确定开启此通道？', {
+                layer.confirm('确定开启此支付渠道？', {
                     skin: 'warning-class',
                     icon: 7,
                     title: false,
