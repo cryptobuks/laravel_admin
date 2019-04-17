@@ -62,6 +62,19 @@ class MerchantController extends Controller
         }
         return view('admin.merchant.create');
     }
+    
+    public function store(){
+        try{
+            $merchants = Merchant::all();
+            foreach($merchants as $merchant){
+                Redis::select(8);
+                Redis::hSet('merchant_info', $merchant->merchant_no, json_encode($merchant->toArray(),320));
+            }
+            return response()->json(['status' => 0, 'message' => "重置缓存成功"]);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
+    }
 
     public function resetKey(Request $request){
         if( $request->isMethod('post') ){

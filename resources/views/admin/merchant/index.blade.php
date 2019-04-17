@@ -8,9 +8,14 @@
                     <div class="card">
                         <div class="card-header" style="height: 50px">
                             <div class="card-tools">
-                                <div class="input-group input-group-sm">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-orange store-merchant" data-href="{{ route('merchant.store') }}">
+                                        <i class="fa fa-refresh"></i> 重置缓存
+                                    </button>
+                                </div>
+                                <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-success create-merchant" data-href="{{ route('merchant.create') }}" data-title="添加商户">
-                                        <i class="fa fa-user-plus"></i>添加商户
+                                        <i class="fa fa-user-plus"></i> 添加商户
                                     </button>
                                 </div>
                             </div>
@@ -59,11 +64,11 @@
 @stop
 @section('script')
     <script type="text/javascript">
-        var $j = jQuery.noConflict();
+        let $j = jQuery.noConflict();
 
         $j('.create-merchant').click(function(){
-            var apiUrl = $j(this).data('href');
-            var title = $j(this).data('title');
+            let apiUrl = $j(this).data('href');
+            let title = $j(this).data('title');
             $j.ajax({
                 url : apiUrl,
                 type : "get",
@@ -108,8 +113,37 @@
             });
         });
 
+        $j('.store-merchant').click(function(){
+            let apiUrl = $j(this).data('href');
+            layer.confirm('确定重置商户缓存？', {
+                skin: 'warning-class',
+                icon: 7,
+                title: false,
+                closeBtn: 0,
+                btn: ['确定','取消'],
+                btnAlign: 'c',
+                anim: 6,
+                shadeClose: true
+            }, function(){
+                $j.ajax({
+                    url : apiUrl,
+                    type : "post",
+                    success: function(data){
+                        if(data.status === 0){
+                            layer.msg(data.message, {icon: 6});
+                        }else{
+                            layer.msg(data.message, {icon: 5});
+                        }
+                    },
+                    error: function(e){
+                        layer.msg(e.statusText, {icon: 2})
+                    }
+                });
+            });
+        });
+
         $j('.reset-key').click(function(){
-            var apiUrl = $j(this).data('href');
+            let apiUrl = $j(this).data('href');
             layer.confirm('是否确定重置密钥？', {
                 skin: 'warning-class',
                 icon: 7,
@@ -139,7 +173,7 @@
         });
 
         $j('.reset-password').click(function(){
-            var apiUrl = $j(this).data('href');
+            let apiUrl = $j(this).data('href');
             $j.ajax({
                 url : apiUrl,
                 type : "get",
@@ -185,7 +219,7 @@
         });
 
         $j('.reset-security').click(function(){
-            var apiUrl = $j(this).data('href');
+            let apiUrl = $j(this).data('href');
             $j.ajax({
                 url : apiUrl,
                 type : "get",
@@ -231,7 +265,7 @@
         });
 
         $j('.del-merchant').click(function(){
-            var apiUrl = $j(this).data('href');
+            let apiUrl = $j(this).data('href');
             layer.confirm('是否确定删除？', {
                 skin: 'warning-class',
                 icon: 7,
