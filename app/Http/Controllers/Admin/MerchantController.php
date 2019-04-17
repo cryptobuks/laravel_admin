@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Admin\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -51,6 +52,9 @@ class MerchantController extends Controller
             $data['status'] = 1; //默认开启
             try{
                 Merchant::create($data);
+                $merchant = Merchant::query()->where('merchant_no',$data['merchant_no'])->first()->toArray();
+                Redis::select(8);
+                Redis::hSet('merchant_info', $merchant['merchant_no'], json_encode($merchant,320));
                 return response()->json(['status' => 0, 'message' => "添加成功"]);
             } catch (\Exception $e){
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
@@ -66,7 +70,10 @@ class MerchantController extends Controller
                 if( !$merchant = Merchant::find($data['id']) ){
                     return response()->json(['status' => 10003, 'message' => "商户ID错误"]);
                 }
-                Merchant::query()->where('id',$data['id'])->update(['key'=>md5(time() . $merchant->salt)]);
+                $merchant['key'] = md5(time() . $merchant->salt);
+                Merchant::query()->where('id',$data['id'])->update(['key'=>$merchant['key']]);
+                Redis::select(8);
+                Redis::hSet('merchant_info', $merchant['merchant_no'], json_encode($merchant,320));
                 return response()->json(['status' => 0, 'message' => "重置密钥成功"]);
             } catch (\Exception $e){
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
@@ -149,6 +156,9 @@ class MerchantController extends Controller
     public function del(Request $request){
         $data = $request->all();
         try{
+            $merchant = Merchant::find($data['id']);
+            Redis::select(8);
+            Redis::hDel('merchant_info', $merchant['merchant_no']);
             Merchant::destroy($data['id']);
             return response()->json(['status' => 0, 'message' => '删除成功']);
         } catch (\Exception $e){
