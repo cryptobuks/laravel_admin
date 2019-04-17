@@ -1,4 +1,9 @@
 @extends('admin_template')
+@section('style')
+    <style>
+        .table .data-time { padding-top: 0; padding-bottom: 0; }
+    </style>
+@stop
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -29,7 +34,6 @@
                                     <th>充值IP</th>
                                     <th>下单时间</th>
                                     <th>到账时间</th>
-                                    <th>操作</th>
                                 </tr>
                                 @foreach($lists as $list)
                                     <tr>
@@ -45,13 +49,8 @@
                                         <td>{{ $list['pay_status'] }}</td>
                                         <td>{{ $list['notice_status'] }}</td>
                                         <td>{{ $list['pay_ip'] }}</td>
-                                        <td>{{ $list['order_time'] }}</td>
-                                        <td>{{ $list['updated_at'] }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-info edit-role" data-href="{{ route('role.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
-                                            <button type="button" class="btn btn-sm btn-purple set-role" data-href="{{ route('role.set',['id'=>$list['id']]) }}"><i class="fa fa-lock"></i> 设置权限</button>
-                                            <button type="button" class="btn btn-sm btn-danger del-role" data-href="{{ route('role.delete',['id'=>$list['id']]) }}"><i class="fa fa-trash"></i> 删除</button>
-                                        </td>
+                                        <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
+                                        <td class="data-time">{!! datetimeLineFeed($list['updated_at']) !!}</td>
                                     </tr>
                                 @endforeach
                             </table>
