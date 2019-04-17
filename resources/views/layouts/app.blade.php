@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" type="image/x-icon" href="/bower_components/admin-lte/dist/img/google_wallet.ico">
     <title>{{ config('app.name', '支付管理后台') }}</title>
 
     <!-- Styles -->
