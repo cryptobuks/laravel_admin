@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class OrderController extends Controller
 {
     public function index(){
-        $lists = Order::all()->toArray();
+        $lists = Order::query()->orderBy('id','DESC')->get()->toArray();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '订单列表'
