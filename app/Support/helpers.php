@@ -74,9 +74,12 @@ if (! function_exists('Sec2Time')) {
 }
 
 if (! function_exists('datetimeLineFeed')) {
-    function datetimeLineFeed($time){
-        $date = date('Y-m-d', strtotime($time));
-        $time = date('H:i:s', strtotime($time));
+    function datetimeLineFeed($datetime){
+        if( !strtotime($datetime) ){
+            return null;
+        }
+        $date = date('Y-m-d', strtotime($datetime));
+        $time = date('H:i:s', strtotime($datetime));
         return $date . "<br/>&ensp;" . $time;
     }
 }
