@@ -2,6 +2,7 @@
 @section('style')
     <style>
         .table .data-time { padding-top: 0; padding-bottom: 0; }
+        table tr td span { cursor: pointer; }
     </style>
 @stop
 @section('content')
@@ -46,8 +47,8 @@
                                         <td>{{ $list['amount'] }}</td>
                                         <td>{{ $list['actual_amount'] }}</td>
                                         <td>{{ $list['fee'] }}</td>
-                                        <td>{{ $list['pay_status'] }}</td>
-                                        <td>{{ $list['notice_status'] }}</td>
+                                        <td>@if($list['pay_status'] == 1) <span class="label label-success">已支付</span> @else <span class="label label-danger">未支付</span> @endif</td>
+                                        <td>@if($list['notice_status'] == 1) <span class="label label-info">已通知</span> @else <span class="label label-danger">未通知</span> @endif</td>
                                         <td>{{ $list['pay_ip'] }}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['pay_time']) !!}</td>
