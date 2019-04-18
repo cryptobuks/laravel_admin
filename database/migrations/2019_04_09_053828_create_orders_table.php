@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('pay_no')->unique()->comment('支付平台系统订单号,本系统随机生成');
             $table->string('order_id')->comment('商户订单号');
             $table->dateTime('order_time')->comment('下单时间');
+            $table->dateTime('pay_time')->comment('支付成功时间');
             $table->string('pay_type')->comment('支付类型(下游提交)');
             $table->string('pay_channel')->comment('支付渠道(提交上游)');
             $table->decimal('amount',8,2)->comment('订单金额');

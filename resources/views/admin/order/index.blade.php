@@ -50,7 +50,7 @@
                                         <td>{{ $list['notice_status'] }}</td>
                                         <td>{{ $list['pay_ip'] }}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
-                                        <td class="data-time">{!! datetimeLineFeed($list['updated_at']) !!}</td>
+                                        <td class="data-time">{!! datetimeLineFeed($list['pay_time']) !!}</td>
                                     </tr>
                                 @endforeach
                             </table>
