@@ -37,7 +37,7 @@ class TestDataSeeder extends Seeder
         PayType::create(['name'=>'银联卡', 'pay_type'=>'union_pay', 'rate'=>'1.6', 'min'=>'100', 'max'=>'50000', 'limit'=>'500000', 'settle_type'=>'T1', 'status'=>'1']);
 
         DB::table('channels')->truncate();
-        Channel::create(['pid'=>'0', 'title'=>'汇丰支付', 'name'=>'HFPay', 'pay_type'=>'null', 'info'=>'null', 'sort'=>'10', 'status'=>'1']);
+        Channel::create(['pid'=>'0', 'title'=>'汇丰支付', 'name'=>'HFPay', 'pay_type'=>'null', 'info'=>'{"gateway":"http://211.144.86.91:12231/api/v3/cashier.php","merchant":"SKB18091018588","key":"dc78f1e05bd7307fd32134eaeed36221"}', 'sort'=>'10', 'status'=>'1']);
         Channel::create(['pid'=>'1', 'title'=>'汇丰支付宝扫码', 'name'=>'null', 'pay_type'=>'alipay_qr', 'info'=>'null', 'sort'=>'10', 'status'=>'1']);
         Channel::create(['pid'=>'1', 'title'=>'汇丰微信H5', 'name'=>'null', 'pay_type'=>'wechat_h5', 'info'=>'null', 'sort'=>'20', 'status'=>'1']);
         Channel::create(['pid'=>'0', 'title'=>'云易付', 'name'=>'YYpay', 'pay_type'=>'null', 'info'=>'null', 'sort'=>'20', 'status'=>'1']);
