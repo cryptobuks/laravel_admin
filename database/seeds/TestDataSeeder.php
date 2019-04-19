@@ -27,7 +27,7 @@ class TestDataSeeder extends Seeder
         $salt = [Str::random(6), Str::random(6), Str::random(6)];
         Merchant::create(['merchant_no'=>'168820', 'name'=>'ctou', 'password'=>md5('123456' . $salt[0]), 'security_password'=>md5('123456' . $salt[0]), 'key'=>md5(time() . $salt[0]), 'salt'=>$salt[0]]);
         Merchant::create(['merchant_no'=>'168861', 'name'=>'lubar', 'password'=>md5('123456' . $salt[1]), 'security_password'=>md5('123456' . $salt[1]), 'key'=>md5(time() . $salt[1]), 'salt'=>$salt[1]]);
-        Merchant::create(['merchant_no'=>'168888', 'name'=>'simida', 'password'=>md5('123456' . $salt[2]), 'security_password'=>md5('123456' . $salt[2]), 'key'=>md5(time() . $salt[2]), 'salt'=>$salt[2]]);
+        Merchant::create(['merchant_no'=>'168888', 'name'=>'simida', 'password'=>md5('123456' . $salt[2]), 'security_password'=>md5('123456' . $salt[2]), 'key'=>'919762e4f5aa02dfe2d6fee8e33aeb18', 'salt'=>$salt[2]]);
 
         DB::table('pay_types')->truncate();
         PayType::create(['name'=>'支付宝扫码', 'pay_type'=>'alipay_qr', 'rate'=>'2.5', 'min'=>'10', 'max'=>'5000', 'limit'=>'300000', 'settle_type'=>'D0', 'status'=>'0']);
