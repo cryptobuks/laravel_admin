@@ -1,7 +1,14 @@
 @extends('admin_template')
 @section('style')
-    <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
-    <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
+{{--    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--}}
+    <style>
+        .small-box .icon {
+            font-size: 70px;
+        }
+        .small-box:hover .icon {
+            font-size: 75px;
+        }
+    </style>
 @stop
 @section('content')
     <section class="content">
@@ -17,7 +24,7 @@
                             <p>订单总数</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fa fa-suitcase"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -31,7 +38,7 @@
                             <p>订单成功率</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fa fa-bar-chart"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -45,7 +52,7 @@
                             <p>新增商户</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fa fa-user-plus"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -59,7 +66,7 @@
                             <p>有效订单数量</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="fa fa-pie-chart"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -73,7 +80,7 @@
                             <p>订单总金额</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-ios-cart"></i>
+                            <i class="fa fa-shopping-cart"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -87,7 +94,7 @@
                             <p>总收入</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-social-yen"></i>
+                            <i class="fa fa-money"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -101,7 +108,7 @@
                             <p>总提现</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-social-yen-outline"></i>
+                            <i class="fa fa-rmb"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -115,7 +122,7 @@
                             <p>好评数量</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-heart"></i>
+                            <i class="fa fa-heart"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
@@ -129,7 +136,7 @@
                             <p>收藏数量</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-android-attach"></i>
+                            <i class="fa fa-paperclip"></i>
                         </div>
                         <a href="#" class="small-box-footer">详细信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
