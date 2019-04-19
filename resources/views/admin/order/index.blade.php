@@ -2,7 +2,7 @@
 @section('style')
     <style>
         .table .data-time { padding-top: 0; padding-bottom: 0; }
-        table tr td span { cursor: pointer; }
+        table tr td small { cursor: pointer; }
     </style>
 @stop
 @section('content')
@@ -47,8 +47,8 @@
                                         <td>{{ $list['amount'] }}</td>
                                         <td>{{ $list['actual_amount'] }}</td>
                                         <td>{{ $list['fee'] }}</td>
-                                        <td>@if($list['pay_status'] == 1) <span class="label label-success">已支付</span> @else <span class="label label-danger">未支付</span> @endif</td>
-                                        <td>@if($list['notice_status'] == 1) <span class="label label-info">已通知</span> @else <span class="label label-danger">未通知</span> @endif</td>
+                                        <td>@if($list['pay_status'] == 1) <small class="badge badge-success">已支付</small> @else <small class="badge badge-danger">未支付</small> @endif</td>
+                                        <td>@if($list['notice_status'] == 1) <small class="badge badge-info notice-status" data-status="{{$list['pay_status']}}">已通知</small> @else <small class="badge badge-danger notice-status" data-status="{{$list['pay_status']}}">未通知</small> @endif <small class="badge badge-notice hide" data-href="{{ route('order.notice',[$list['id']]) }}">重发通知</small></td>
                                         <td>{{ $list['pay_ip'] }}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['pay_time']) !!}</td>
@@ -69,147 +69,22 @@
     <script type="text/javascript">
         let $j = jQuery.noConflict();
 
-        $j('.create-role').click(function(){
-            let apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '添加角色',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
-                        }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
-            });
+        $j('.notice-status').mouseover(function () {
+            let payStatus = $j(this).data('status');
+            if( payStatus === 1 ){
+                $j(this).addClass('hide');
+                $j(this).next().removeClass('hide')
+            }
         });
 
-        $j('.edit-role').click(function(){
-            let apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '编辑',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
-                        }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
-            });
+        $j('.badge-notice').mouseout(function () {
+            $j(this).addClass('hide');
+            $j(this).prev().removeClass('hide')
         });
 
-        $j('.set-role').click(function(){
+        $j('.badge-notice').click(function(){
             let apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '设置权限',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
-                        }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
-            });
-        });
-
-        $j('.del-role').click(function(){
-            let apiUrl = $j(this).data('href');
-            layer.confirm('是否确定删除？', {
+            layer.confirm('确定重发回调通知？', {
                 skin: 'warning-class',
                 icon: 7,
                 title: false,
@@ -221,7 +96,7 @@
             }, function(){
                 $j.ajax({
                     url : apiUrl,
-                    type : "delete",
+                    type : "post",
                     success: function(data){
                         if(data.status === 0){
                             layer.msg(data.message, {icon: 6});

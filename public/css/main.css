@@ -78,3 +78,8 @@ small {
     background-color: #008eb9;
     border-color: #008eb9;
 }
+
+.badge-notice {
+    color: #fff;
+    background-color: #921992;
+}

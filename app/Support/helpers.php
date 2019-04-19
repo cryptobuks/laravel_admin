@@ -83,3 +83,52 @@ if (! function_exists('datetimeLineFeed')) {
         return $date . "<br/>&ensp;" . $time;
     }
 }
+
+if (! function_exists('generateSign')) {
+    /**
+     * 将所有参与签名的参数按名称从a到z进行排序
+     * 然后使用URL键值对的格式(即key1=value1&key2=value2…)拼接起来
+     * 在字符串的最后还需拼接上&key=商户密钥
+     * 最后进行MD5加密生成的小写字符串即为签名
+     * @param $data
+     * @param $md5Key
+     * @return string
+     */
+    function generateSign($data, $md5Key){
+        ksort($data);
+        $str = '';
+        foreach ($data as $key => $value) {
+            if($value != ''){
+                $str .= $key.'='.$value.'&';
+            }
+        }
+        $str .= 'key='.$md5Key;
+        $sign = strtolower(md5($str));
+        return $sign;
+    }
+
+}
+
+if (! function_exists('httpRequest')) {
+    /**
+     * @param $url
+     * @param $params
+     * @param string $type
+     * @param array $header
+     * @return bool|string
+     */
+    function httpRequest($url, $params, $type='POST', $header=array()){
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
+
+}

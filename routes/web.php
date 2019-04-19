@@ -105,6 +105,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' =>	['au
     Route::group(['prefix' => '/order'], function(){
         Route::get('/index', 'OrderController@index')->name('order.index');
         Route::any('/remedy/{id}', 'OrderController@remedy')->name('order.remedy');
+        Route::post('/notice/{id}', 'OrderController@notice')->name('order.notice');
         Route::any('/detail/{id}', 'OrderController@detail')->name('order.detail');
     });
 

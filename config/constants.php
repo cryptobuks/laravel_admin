@@ -52,6 +52,7 @@ return [
 
         'admin/order/index'                 => '订单列表',
         'admin/order/remedy/{id}'           => '补单操作',
+        'admin/order/notice/{id}'           => '发送回调',
         'admin/order/detail/{id}'           => '订单详情',
 
         'admin/bank/index'                  => '银行类别',
