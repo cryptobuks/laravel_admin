@@ -47,7 +47,7 @@
                                         <td>{{ $list['amount'] }}</td>
                                         <td>{{ $list['actual_amount'] }}</td>
                                         <td>{{ $list['fee'] }}</td>
-                                        <td>@if($list['pay_status'] == 1) <small class="badge badge-success">已支付</small> @else <small class="badge badge-danger">未支付</small> @endif</td>
+                                        <td>@if($list['pay_status'] == 1) <small class="badge badge-success">已支付</small> @else <small class="badge badge-danger pay-status">未支付</small> @endif <small class="badge badge-remedy hide" data-href="{{ route('order.remedy',[$list['id']]) }}">补单</small></td>
                                         <td>@if($list['notice_status'] == 1) <small class="badge badge-info notice-status" data-status="{{$list['pay_status']}}">已通知</small> @else <small class="badge badge-danger notice-status" data-status="{{$list['pay_status']}}">未通知</small> @endif <small class="badge badge-notice hide" data-href="{{ route('order.notice',[$list['id']]) }}">重发通知</small></td>
                                         <td>{{ $list['pay_ip'] }}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
@@ -68,6 +68,46 @@
 @section('script')
     <script type="text/javascript">
         let $j = jQuery.noConflict();
+
+        $j('.pay-status').mouseover(function () {
+            $j(this).addClass('hide');
+            $j(this).next().removeClass('hide')
+        });
+
+        $j('.badge-remedy').mouseout(function () {
+            $j(this).addClass('hide');
+            $j(this).prev().removeClass('hide')
+        });
+
+        $j('.badge-remedy').click(function(){
+            let apiUrl = $j(this).data('href');
+            layer.confirm('是否确定补单？', {
+                skin: 'warning-class',
+                icon: 7,
+                title: false,
+                closeBtn: 0,
+                btn: ['确定','取消'],
+                btnAlign: 'c',
+                anim: 6,
+                shadeClose: true
+            }, function(){
+                $j.ajax({
+                    url : apiUrl,
+                    type : "post",
+                    success: function(data){
+                        if(data.status === 0){
+                            layer.msg(data.message, {icon: 6});
+                            window.location.reload();
+                        }else{
+                            layer.msg(data.message, {icon: 5});
+                        }
+                    },
+                    error: function(e){
+                        layer.msg(e.statusText, {icon: 2})
+                    }
+                });
+            });
+        });
 
         $j('.notice-status').mouseover(function () {
             let payStatus = $j(this).data('status');

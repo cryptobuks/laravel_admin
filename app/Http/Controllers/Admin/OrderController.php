@@ -18,6 +18,21 @@ class OrderController extends Controller
         return view('admin.order.index')->with($viewData);
     }
 
+    public function remedy($id){
+        try{
+            $order = Order::query()->where('id',$id)->first()->toArray();
+            $order['pay_time'] = date('Y-m-d H:i:s');
+            $order['actual_amount'] = $order['amount'];
+            $order['fee'] = 0;
+            $order['pay_status'] = 1;
+            Order::query()->where('id',$order['id'])->update($order);
+            self::sendNotice($order);
+            return response()->json(['status' => 0, 'message' => "补单成功"]);
+        } catch (\Exception $e){
+            return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
+        }
+    }
+
     public function notice($id){
         try{
             $order = Order::find($id);
