@@ -146,49 +146,7 @@
         });
 
         $j('.set-role').click(function(){
-            let apiUrl = $j(this).data('href');
-            $j.ajax({
-                url : apiUrl,
-                type : "get",
-                dataType : "html",
-                success: function(data){
-                    layer.open({
-                        title: '设置权限',
-                        content: data,
-                        type: 1,
-                        offset: '100px',
-                        area: '500px',
-                        closeBtn: 0,
-                        shadeClose: true,
-                        fixed: false,
-                        btn: ['确定','取消'],
-                        yes: function () {
-                            $j.ajax({
-                                url : apiUrl,
-                                type : "post",
-                                data : $j('form').serialize(),
-                                success: function(data){
-                                    if(data.status === 0){
-                                        layer.msg(data.message, {icon: 6});
-                                        window.location.reload();
-                                    }else{
-                                        layer.msg(data.message, {icon: 5});
-                                    }
-                                },
-                                error: function(e){
-                                    layer.msg(e.statusText, {icon: 2})
-                                }
-                            });
-                        },
-                        btn2: function () {
-                            layer.close();
-                        }
-                    });
-                },
-                error: function(e){
-                    layer.msg(e.statusText, {icon: 2})
-                }
-            });
+            window.location.href = $j(this).data('href');
         });
 
         $j('.del-role').click(function(){

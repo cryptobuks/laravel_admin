@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Admin\Permission;
 use App\Model\Admin\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -84,8 +85,45 @@ class RoleController extends Controller
         return view('admin.role.edit')->with($data);
     }
 
-    public function set(){
-        //设置权限页面
+    public function set(Request $request){
+        $id = $request->input('id');
+        $role = Role::find($id);
+
+        $index_perm = Permission::findByMethodAndUri('GET','admin/index');
+        if($role->permission->contains($index_perm)){
+            $index_perm->value = 1;
+        }else{
+            $index_perm->value = 0;
+        }
+
+        $perms = Permission::getTree();
+        $group_values = [];
+        foreach ($perms as $group => $sub_perms) {
+            $group_value = 1;
+            foreach ($sub_perms as &$perm) {
+                if($role->permission->contains($perm)){
+                    $perm['value'] = 1;
+                }else{
+                    $perm['value'] = 0;
+                    $group_value = 0;
+                }
+            }
+            $group_values[$group] = $group_value;
+        }
+
+        $groups = array_keys($perms);
+        $groups = json_encode($groups,320);
+
+        $viewData = [
+            'page_title'    => '角色"'.$role->name.'"分配权限',
+            'perms'         => $perms,
+            'role'          => $role,
+            'groups'        => $groups,
+            'group_values'  => $group_values,
+            'index_perm'    => $index_perm
+        ];
+        return view('admin.role.set', $viewData);
+
     }
 
     public function del(Request $request){

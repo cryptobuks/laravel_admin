@@ -39,4 +39,19 @@ class Permission extends Model
         return self::query()->where('uri','like','%index')->orWhere('description','like','%页面')->get();
     }
 
+    //获取admin路由组的路由表
+    public static function getTree(){
+        $perms = self::query()->get();
+        $tree = [];
+        foreach($perms as $perm){
+            $uri = $perm->uri;
+            $uris = explode("/",$uri);
+            if($uris[0] == 'admin' ){
+                $group = $uris[1]; //routes.php的路由不能随便加,admin路由组后面一段uri是权限组;
+                $tree[$group][] = $perm;
+            }
+        }
+        return $tree;
+    }
+
 }
