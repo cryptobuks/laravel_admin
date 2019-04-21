@@ -48,7 +48,7 @@
                                         <td>{{ $list['actual_amount'] }}</td>
                                         <td>{{ $list['fee'] }}</td>
                                         <td>@if($list['pay_status'] == 1) <small class="badge badge-success">已支付</small> @else <small class="badge badge-danger pay-status">未支付</small> @endif <small class="badge badge-remedy hide" data-href="{{ route('order.remedy',[$list['id']]) }}">补单</small></td>
-                                        <td>@if($list['notice_status'] == 1) <small class="badge badge-info notice-status" data-status="{{$list['pay_status']}}">已通知</small> @else <small class="badge badge-danger notice-status" data-status="{{$list['pay_status']}}">未通知</small> @endif <small class="badge badge-notice hide" data-href="{{ route('order.notice',[$list['id']]) }}">重发通知</small></td>
+                                        <td>@if($list['notice_status'] == 1) <small class="badge badge-info notice-status" data-status="{{$list['pay_status']}}">已通知</small> @else <small class="badge badge-danger notice-status" data-status="{{$list['pay_status']}}">未通知</small> @endif <small class="badge badge-notice hide" data-href="{{ route('order.notice',[$list['id']]) }}">重发</small></td>
                                         <td>{{ $list['pay_ip'] }}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['order_time']) !!}</td>
                                         <td class="data-time">{!! datetimeLineFeed($list['pay_time']) !!}</td>
