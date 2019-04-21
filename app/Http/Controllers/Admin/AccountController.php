@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin\Account;
+use App\Model\Admin\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class AccountController extends Controller
 {
     public function index(){
-        $lists = Account::all()->toArray();
+        $lists = Account::getList();
         $viewData = [
             'lists'     => $lists,
             'page_title'=> '管理员列表',
@@ -95,7 +96,8 @@ class AccountController extends Controller
                 return response()->json(['status' => 20001, 'message' => $e->getMessage()]);
             }
         }
-        return view('admin.account.create');
+        $data['roles'] = Role::query()->orderBy('id','desc')->get();
+        return view('admin.account.create')->with($data);
     }
 
     public function edit(Request $request){
@@ -134,7 +136,9 @@ class AccountController extends Controller
             $account = User::find($data['id']);
             $data['name'] = $account->name;
             $data['email'] = $account->email;
+            $data['role_id'] = $account->role_id;
         }
+        $data['roles'] = Role::query()->orderBy('id','desc')->get();
         return view('admin.account.edit')->with($data);
     }
 

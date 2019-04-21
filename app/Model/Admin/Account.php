@@ -48,5 +48,14 @@ class Account extends Model
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public static function getList(){
+        return self::with('roles')->orderBy('id','desc')->paginate(10);
+    }
+
+    public function roles(){
+        //hasOne和BelongsTo是两种关系对象,虽然在最终的sql相同,但是hasOne没有dissociate这个方法,BelongsTo有
+        //return $this->hasOne('App\Model\Admin\Role','id','role_id');
+        return $this->BelongsTo('App\Model\Admin\Role','role_id','id');
+    }
 
 }

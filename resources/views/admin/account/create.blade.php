@@ -16,6 +16,15 @@
             <label for="password_confirmation">确认密码</label>
             <input type="password" class="form-control" name="password_confirmation" placeholder="请输入确认密码">
         </div>
+        <div class="form-group">
+            <label>角色</label>
+            <select class="form-control" name="role_id">
+                <option value="0">暂无角色</option>
+                @foreach($roles as $role)
+                    <option value="{{$role->id}}">{{$role->name}}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     <!-- /.card-body -->
 </form>

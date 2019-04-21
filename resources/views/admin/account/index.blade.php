@@ -31,7 +31,7 @@
                                         <td>{{ $list['id'] }}</td>
                                         <td>{{ $list['name'] }}</td>
                                         <td>{{ $list['email'] }}</td>
-                                        <td>{{ $list['role_id'] }}</td>
+                                        <td>{{ $list['roles']['name'] }}</td>
                                         <td>{{ $list['created_at'] }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info edit-account" data-href="{{ route('account.edit',['id'=>$list['id']]) }}"><i class="fa fa-edit"></i> 编辑</button>
